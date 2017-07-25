@@ -13,6 +13,14 @@ int MouseLeftClick()
 	return res;
 }
 
+int MouseLeftClick(const int x, const int y)
+{
+	int res = SetMousePosition(x, y);
+	if (res == 0)
+		res = MouseLeftClick();
+	return res;
+}
+
 //
 // Desc    : Clicks the left mouse button down
 // Returns : 0

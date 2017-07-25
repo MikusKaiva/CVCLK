@@ -77,22 +77,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DesktopCapture.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="FindImage.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="MacroFunctions.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="MouseControl.cpp" />
+    <ClCompile Include="MouseControl.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="SearchObj.cpp" />
     <ClCompile Include="test_cli_wrap.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="test_EShr.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="test_ui_init.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DesktopCapture.h" />
     <ClInclude Include="FindImage.h" />
+    <ClInclude Include="MacroFunctions.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MouseControl.h" />
+    <ClInclude Include="SearchObj.h" />
     <ClInclude Include="test_cli_wrap.h" />
+    <ClInclude Include="test_EShr.h" />
     <ClInclude Include="test_ui_init.h" />
   </ItemGroup>
   <ItemGroup>

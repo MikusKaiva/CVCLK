@@ -29,6 +29,18 @@
     <ClCompile Include="test_ui_init.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_EShr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchObj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopCapture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MouseControl.h">
@@ -44,6 +56,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test_ui_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_EShr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopCapture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

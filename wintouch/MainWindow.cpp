@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "test_cli_wrap.h"
 #include "test_ui_init.h"
+#include "test_EShr.h"
 
 namespace ManagedCode
 {
@@ -37,8 +38,9 @@ namespace ManagedCode
 
 	int RunTests()
 	{
-		TestUiInit();
-		TestCliWrap();
+		//TestUiInit();
+		//TestCliWrap();
+		TestEShr();
 		return 0;
 	}
 }
