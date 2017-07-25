@@ -1,12 +1,9 @@
 #Sulution Files
 wintouch.sdf
-wintouch.sln
-wintouch.v12.suo
-*.vcxproj
-*.filters
-*.user
-*.props
 *.opensdf
+*.suo
+
+.vs/
 
 #Compiles
 Release/

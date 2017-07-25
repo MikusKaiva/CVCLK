@@ -1,25 +1,90 @@
+#include "MainWindow.h"
+#include <Windows.h>
 
-#include <opencv2/opencv.hpp>
-#include "FindImage.h"
+using namespace std;
+LRESULT CALLBACK WindowFunc(HWND, UINT, WPARAM, LPARAM);
 
-using namespace cv;
-
-int main()
+[System::STAThreadAttribute]  
+int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst,
+	_In_ LPSTR args, _In_ int winMode)
 {
-	char* imageName = "fck.png";
-	Mat image;
-	image = imread(imageName, IMREAD_COLOR);
+    HWND hwnd;
+    MSG msg;
+    WNDCLASSEX wcl;
+    //HACCEL hAccel;
 
-	int x1, x2, y1, y2;
-	Mat imgToSearch, imgLocation;
-	imgToSearch = imread("t.png", IMREAD_COLOR);
-	imgLocation = imread("fck.png", IMREAD_COLOR);
-	FindImage(imgToSearch, imgLocation, x1, y1, x2, y2);
-	
-	rectangle(imgLocation, Rect(x1, y1, imgToSearch.cols, imgToSearch.rows), Scalar(0, 255, 0), 4);
+    // Define a window class.  
+    wcl.cbSize = sizeof(WNDCLASSEX);
 
-	namedWindow(imageName, WINDOW_AUTOSIZE);
-	imshow(imageName, imgLocation);
-	waitKey(0);
-	return 0;
+    wcl.hInstance = hThisInst;     // handle to this instance  
+    wcl.lpszClassName = "wintouch";   // window class name  
+    wcl.lpfnWndProc = WindowFunc;  // window function  
+    wcl.style = 0;                 // default style  
+
+    wcl.hIcon = LoadIcon(NULL, IDI_APPLICATION); // large icon  
+    wcl.hIconSm = NULL; // use small version of large icon 
+    wcl.hCursor = LoadCursor(NULL, IDC_ARROW);  // cursor style 
+
+    //wcl.lpszMenuName = "ThreadAppMenu"; // main menu 
+
+    wcl.cbClsExtra = 0; // no extra memory needed 
+    wcl.cbWndExtra = 0;
+
+    // Make the window background white. 
+    wcl.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+
+    // Register the window class.  
+    if (!RegisterClassEx(&wcl)) return 0;
+
+    /* Now that a window class has been registered, a window
+       can be created. */
+    hwnd = CreateWindow(
+        wcl.lpszClassName, // name of window class  
+        "Using a Thread Control Panel", // title 
+        WS_OVERLAPPEDWINDOW, // window style - normal  
+        CW_USEDEFAULT, // X coordinate - let Windows decide  
+        CW_USEDEFAULT, // Y coordinate - let Windows decide  
+        200,           // width
+        200,           // height
+        NULL,          // no parent window  
+        NULL,          // no override of class menu 
+        hThisInst,     // instance handle 
+        NULL           // no additional arguments  
+        );
+
+    // Display the window.  
+    ShowWindow(hwnd, winMode);
+    UpdateWindow(hwnd);
+
+    // Create the message loop.  
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+		DispatchMessage(&msg);      
+    }
+
+    return static_cast<int>(msg.wParam);
+}
+
+LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message,
+    WPARAM wParam, LPARAM lParam)
+{
+    LRESULT ret;
+	RECT rect;
+
+    switch (message) {
+	case WM_CREATE :
+	  GetClientRect(hWnd, &rect);
+	  ManagedCode::GetHwnd(hWnd, 0, 0, rect.right, rect.bottom);
+	break;
+    case WM_COMMAND:
+        break;
+    case WM_DESTROY: // terminate the program 
+        PostQuitMessage(0);
+        break;
+    default:
+        ret = DefWindowProc(hWnd, message, wParam, lParam);
+        return ret;
+    }
+
+    return 0;
 }
