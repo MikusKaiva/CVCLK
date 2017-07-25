@@ -1,47 +1,91 @@
-#include <opencv2/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>     // cv::Canny()
-#include <iostream>
+#include "MainWindow.h"
+#include <Windows.h>
 
-using namespace cv;
 using namespace std;
+LRESULT CALLBACK WindowFunc(HWND, UINT, WPARAM, LPARAM);
 
-int main( int argc, char** argv )
+[System::STAThreadAttribute]  
+int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst,
+	_In_ LPSTR args, _In_ int winMode)
 {
-	 char* imageName = argv[1];
-	 Mat image;
-	 image = imread( imageName, IMREAD_COLOR );
-	 if( argc != 2 || !image.data )
-	 {
-	   printf( " No image data \n " );
-	   return -1;
-	 }
-	 Mat gray_image;
-	 cvtColor( image, gray_image, COLOR_BGR2GRAY );
-	 imwrite( "../../images/Gray_Image.jpg", gray_image );
-	 namedWindow( imageName, WINDOW_AUTOSIZE );
-	 namedWindow( "Gray image", WINDOW_AUTOSIZE );
-	 imshow( imageName, image );
-	 imshow( "Gray image", gray_image );
-	 waitKey(0);
-	 return 0;
+    HWND hwnd;
+    MSG msg;
+    WNDCLASSEX wcl;
+    //HACCEL hAccel;
+
+    // Define a window class.  
+    wcl.cbSize = sizeof(WNDCLASSEX);
+
+    wcl.hInstance = hThisInst;     // handle to this instance  
+    wcl.lpszClassName = "wintouch";   // window class name  
+    wcl.lpfnWndProc = WindowFunc;  // window function  
+    wcl.style = 0;                 // default style  
+
+    wcl.hIcon = LoadIcon(NULL, IDI_APPLICATION); // large icon  
+    wcl.hIconSm = NULL; // use small version of large icon 
+    wcl.hCursor = LoadCursor(NULL, IDC_ARROW);  // cursor style 
+
+    //wcl.lpszMenuName = "ThreadAppMenu"; // main menu 
+
+    wcl.cbClsExtra = 0; // no extra memory needed 
+    wcl.cbWndExtra = 0;
+
+    // Make the window background white. 
+    wcl.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+
+    // Register the window class.  
+    if (!RegisterClassEx(&wcl)) return 0;
+
+    /* Now that a window class has been registered, a window
+       can be created. */
+    hwnd = CreateWindow(
+        wcl.lpszClassName, // name of window class  
+        "Using a Thread Control Panel", // title 
+        WS_OVERLAPPEDWINDOW, // window style - normal  
+        CW_USEDEFAULT, // X coordinate - let Windows decide  
+        CW_USEDEFAULT, // Y coordinate - let Windows decide  
+        200,           // width
+        200,           // height
+        NULL,          // no parent window  
+        NULL,          // no override of class menu 
+        hThisInst,     // instance handle 
+        NULL           // no additional arguments  
+        );
+
+    // Display the window.  
+    ShowWindow(hwnd, winMode);
+    UpdateWindow(hwnd);
+
+    // Create the message loop.  
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+		DispatchMessage(&msg);      
+    }
+
+    return static_cast<int>(msg.wParam);
 }
 
-//#include "MouseControl.h"
-//#include <iostream>
-//
-//int main()
-//{
-//	int x = 0;
-//	int y = 0;
-//	SetMousePosition(600, 600);
-//	GetMousePosition(x, y);
-//	std::cout << "x=" << x << ", y=" << y << std::endl;
-//	MoveMouseTo(300, 300);
-//	GetMousePosition(x, y);
-//	std::cout << "x=" << x << ", y=" << y;
-//	system("pause");
-//	//LeftClick();
-//	system("pause");
-//}
+LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message,
+    WPARAM wParam, LPARAM lParam)
+{
+    LRESULT ret;
+	RECT rect;
+
+    switch (message) {
+	case WM_CREATE :
+	  GetClientRect(hWnd, &rect);
+	  ManagedCode::GetHwnd(hWnd, 0, 0, rect.right, rect.bottom);
+	break;
+    case WM_COMMAND:
+        break;
+    case WM_DESTROY: // terminate the program 
+        PostQuitMessage(0);
+        break;
+    default:
+        ret = DefWindowProc(hWnd, message, wParam, lParam);
+        return ret;
+    }
+
+    return 0;
+}
+
