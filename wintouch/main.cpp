@@ -88,4 +88,3 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message,
 
     return 0;
 }
-
