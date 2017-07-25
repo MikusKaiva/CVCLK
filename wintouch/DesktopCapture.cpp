@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <opencv2/imgproc.hpp>
 #include "DesktopCapture.h"
 
 using namespace cv;
@@ -27,7 +28,7 @@ int GetPartOfDesktop(cv::Mat& src, int x1, int y1, int x2, int y2)
 	// use the previously created device context with the bitmap
 	SelectObject(hdcMemory, hBitmap);
 	// copy from the window device context to the bitmap device context
-	src.create(h, w, CV_8UC4);
+	cv::Mat bmpMat = Mat(h, w, CV_8UC4);
 	BitBlt(hdcMemory, 0, 0, w, h, hdcSource, x1, y1, SRCCOPY);
 
 	BITMAPINFOHEADER  bi = {0};
@@ -37,7 +38,8 @@ int GetPartOfDesktop(cv::Mat& src, int x1, int y1, int x2, int y2)
 	bi.biPlanes = 1;
 	bi.biBitCount = 32;
 	bi.biCompression = BI_RGB;
-	GetDIBits(hdcMemory, hBitmap, 0, h, src.data, (BITMAPINFO *)&bi, DIB_RGB_COLORS);  //copy from hdcMemory to hBitmap
+	GetDIBits(hdcMemory, hBitmap, 0, h, bmpMat.data, (BITMAPINFO *)&bi, DIB_RGB_COLORS);  //copy from hdcMemory to hBitmap
+	cvtColor(bmpMat, src, COLOR_BGRA2BGR);
 
 	DeleteObject(hBitmap);
 	DeleteDC(hdcSource);
