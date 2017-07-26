@@ -14,5 +14,5 @@ public:
 	static Coords coords;
 
 private:
-	bool canGoBack();
+	bool CanGoBack();
 };

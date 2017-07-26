@@ -9,42 +9,90 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\general">
+      <UniqueIdentifier>{6bc6b6b9-71c4-40ce-a3b3-bc2b977d1e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gme">
+      <UniqueIdentifier>{d8061374-57a3-42bb-99c3-dfa537c536fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tests">
+      <UniqueIdentifier>{8aea8619-7079-4db8-8a8d-694437eb69e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\general">
+      <UniqueIdentifier>{6ea6ac60-ae10-4fee-b85b-a71ce8b5e419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gme">
+      <UniqueIdentifier>{2b5706c1-6b38-4ef8-9b75-429db4d3fa2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests">
+      <UniqueIdentifier>{466e9e26-8010-42a7-a16f-1dcf9314b53d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FindImage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="test_ui_init.cpp">
+      <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="test_cli_wrap.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseControl.cpp">
+      <Filter>Source Files\general</Filter>
+    </ClCompile>
+    <ClCompile Include="FindImage.cpp">
+      <Filter>Source Files\general</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\general</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\general</Filter>
     </ClCompile>
-    <ClCompile Include="test_ui_init.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Coords.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="FFapp.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="Nox.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="DesktopCapture.cpp">
+      <Filter>Source Files\general</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MouseControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FindImage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="test_ui_init.h">
+      <Filter>Header Files\tests</Filter>
     </ClInclude>
     <ClInclude Include="test_cli_wrap.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="FindImage.h">
+      <Filter>Header Files\general</Filter>
     </ClInclude>
     <ClInclude Include="MainWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\general</Filter>
     </ClInclude>
-    <ClInclude Include="test_ui_init.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MouseControl.h">
+      <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="Coords.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="FFapp.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="Nox.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="DesktopCapture.h">
+      <Filter>Header Files\general</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
