@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "test_cli_wrap.h"
 #include "test_ui_init.h"
+#include "Nox.h"
 
 namespace ManagedCode
 {
@@ -37,8 +38,10 @@ namespace ManagedCode
 
 	int RunTests()
 	{
-		TestUiInit();
-		TestCliWrap();
+		Nox nox = Nox();
+		nox.DetermineLocation();
+		//TestUiInit();
+		//TestCliWrap();
 		return 0;
 	}
 }

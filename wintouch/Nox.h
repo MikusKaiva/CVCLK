@@ -11,4 +11,6 @@ public:
 	bool IsRunning();
 	static int DetermineLocation();
 	static Coords coords;
+	const static int TOP_BAR_HEIGHT;
+	const static int RIGHT_BAR_WIDTH;
 };

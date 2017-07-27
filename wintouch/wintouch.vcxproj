@@ -77,23 +77,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Coords.cpp" />
+    <ClCompile Include="DesktopCapture.cpp" />
+    <ClCompile Include="FFapp.cpp" />
     <ClCompile Include="FindImage.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MouseControl.cpp" />
+    <ClCompile Include="Nox.cpp" />
     <ClCompile Include="test_cli_wrap.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="test_ui_init.cpp" />
+    <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Coords.h" />
+    <ClInclude Include="DesktopCapture.h" />
+    <ClInclude Include="FFapp.h" />
     <ClInclude Include="FindImage.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MouseControl.h" />
+    <ClInclude Include="Nox.h" />
     <ClInclude Include="test_cli_wrap.h" />
     <ClInclude Include="test_ui_init.h" />
+    <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />

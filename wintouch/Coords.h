@@ -13,16 +13,19 @@ public:
 	int GetAbsX2();
 	int GetAbsY1();
 	int GetAbsY2();
+	int GetOffsetX();
+	int GetOffsetY();
 
 	int SetX(int x1, int x2);
 	int SetY(int y1, int y2);
 	int SetAbsX(int x1, int x2);
 	int SetAbsY(int y1, int y2);
-	int SetOffsetX(int value);
-	int SetOffsetY(int value);
+	int SetOffset(int offsetX, int offsetY);
 
 	int GetMidX();
 	int GetMidY();
+	int GetAbsMidX();
+	int GetAbsMidY();
 
 private:
 	int x1, x2, y1, y2, offsetX, offsetY;
