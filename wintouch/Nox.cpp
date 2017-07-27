@@ -3,6 +3,7 @@
 #include "DesktopCapture.h"
 #include "FindImage.h"
 #include "FFapp.h"
+#include "Log.h"
 
 using namespace cv;
 
@@ -21,11 +22,14 @@ int Nox::DetermineLocation()
 	int x1, y1, x2, y2;
 
 	res = GetPartOfDesktop(src, 0, 0, SEARCH_AREA_X2, SEARCH_AREA_Y2);
+	if (res != 0) LOG("Failed to get Part Of Desktop");
+
 	if (res == 0)
 	{
 		templ = imread("images/nox.png", IMREAD_COLOR);
 		if (templ.empty())
 		{
+			LOG("Image 'images/nox.png' not found");
 			res = -1;
 		}
 	}
@@ -33,6 +37,7 @@ int Nox::DetermineLocation()
 	if (res == 0)
 	{
 		res = FindImage(templ, src, x1, y1, x2, y2);
+		if (res != 0) LOG("Nox not found on desktop");
 	}
 
 	if (res == 0 && (x1 != coords.GetAbsX1() || x2 != coords.GetAbsX2() || y1 != coords.GetAbsY1() || y2 != coords.GetAbsY2()))
@@ -40,6 +45,7 @@ int Nox::DetermineLocation()
 		coords.SetOffset(x1, y1);
 		coords.SetAbsX(x1, x1 + WIDTH);
 		coords.SetAbsY(y1, y1 + HEIGHT);
+		LOG("Determining the location of FFapp");
 		FFapp::DetermineLocation();
 	}
 

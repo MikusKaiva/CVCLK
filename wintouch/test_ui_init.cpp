@@ -3,6 +3,6 @@
 
 int TestUiInit()
 {
-	ManagedCode::ManagedGlobals::w->MyButtonValue = "12";
+	//ManagedCode::ManagedGlobals::w->MyButtonValue = "12";
 	return 0;
 }

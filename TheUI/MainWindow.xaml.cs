@@ -1,74 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TheUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class wintouch : Page, INotifyPropertyChanged
+    public partial class wintouch : Page
     {
+        private int index;
+
+        public ObservableCollection<LogEntry> LogEntries { get; set; }
+
         public wintouch()
         {
             InitializeComponent();
+            Init();
         }
         public wintouch(int w, int h)
         {
             InitializeComponent();
-            this.Width = w;
-            this.Height = h;
+            Width = w;
+            Height = h;
+            Init();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Log(string msg)
         {
-            MyButtonValue = "xx";
+            DateTime time = DateTime.Now;
+            string timeString = time.Hour.ToString() + ":";
+            if (time.Minute <= 9) timeString += "0";
+            timeString += time.Minute.ToString() + ":";
+            if (time.Second <= 9) timeString += "0";
+            timeString += time.Second.ToString() + "  ";
+            LogEntries.Add(new LogEntry() { Index = index++, DateTime = timeString, Message = msg });
         }
 
-        public void ShowMessage()
+        private void Init()
         {
-            MessageBox.Show("Try me!");
+            DataContext = LogEntries = new ObservableCollection<LogEntry>();
         }
+    }
 
+    public class LogEntry : PropertyChangedBase
+    {
+        public string DateTime { get; set; }
+        public int Index { get; set; }
+        public string Message { get; set; }
+    }
 
-        private string myField;
+    public class CollapsibleLogEntry : LogEntry
+    {
+        public List<LogEntry> Contents { get; set; }
+    }
 
-        public string MyButtonValue
-        {
-            get
-            {
-                return this.myField;
-            }
-            set
-            {
-                if (value != this.myField)
-                {
-                    this.myField = value;
-                    NotifyPropertyChanged("MyButtonValue");
-                }
-            }
-        }
-
-        protected void NotifyPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+    public class PropertyChangedBase : INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler PropertyChanged;
-        //public String MyButtonValue { get; set; }
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }));
+        }
     }
 }
