@@ -62,6 +62,9 @@
     <ClCompile Include="DesktopCapture.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files\general</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -92,6 +95,9 @@
       <Filter>Header Files\gme</Filter>
     </ClInclude>
     <ClInclude Include="DesktopCapture.h">
+      <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
       <Filter>Header Files\general</Filter>
     </ClInclude>
   </ItemGroup>

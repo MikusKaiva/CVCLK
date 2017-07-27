@@ -83,6 +83,7 @@
     <ClCompile Include="FindImage.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MouseControl.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="DesktopCapture.h" />
     <ClInclude Include="FFapp.h" />
     <ClInclude Include="FindImage.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MouseControl.h" />
     <ClInclude Include="Nox.h" />
