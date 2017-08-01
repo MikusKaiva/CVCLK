@@ -9,19 +9,19 @@ using namespace std;
 // Register New macros that can be used in macros.dat file here.
 int MacroFile::InitMacroNames()
 {
-	MacroNames["ClickDungeon"					] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickNextStep"					] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickNoCompanionStep"			] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickDepartStep"				] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["WaitAttackStep"					] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickAttackStep"				] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickRepeatStep"				] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["WaitResultsStep"				] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsGilStep"			] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsExpStep"			] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsItemsStep"			] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickConnectionErrorStep"		] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickDailyQuestCompletedStep"	] = std::pair<int, int(*)(void)>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickDungeon"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickNextStep"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickNoCompanionStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickDepartStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickRepeatStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickResultsItemsStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickConnectionErrorStep"		] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickDailyQuestCompletedStep"	] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
 	return 0;
 }
 
@@ -32,10 +32,11 @@ int MacroFile::LoadMacroFile()
 	ifstream f(fileName);
 	InitMacroNames();
 	lineNo = 0;
+	int ret = 0;
 
 	if (f.is_open())
 	{
-		MacroStepDB.clear();
+		macroStepDB.clear();
 		string line, dungName, stepName, nexStepName;
 
 		while (getline(f, line))
@@ -48,26 +49,26 @@ int MacroFile::LoadMacroFile()
 				{
 					int retflag;
 					ReadDungName(f, line, retflag);
-					if (retflag == 2) break;
+					if (retflag == 2) {ret = -1; break; }
 					if (retflag == 3) continue;
 				}
 				else if (line == "[SEQUENTIAL_STEPS]")
 				{
 					int retflag;
 					ReadSequentialSteps(f, line, retflag);
-					if (retflag == 2) break;
+					if (retflag == 2) { ret = -1; break; }
 				}
 				else if (line == "[UNIQUE_STEPS]")
 				{
 					int retflag;
 					ReadUniqueSteps(f, line, retflag);
-					if (retflag == 2) break;
+					if (retflag == 2) { ret = -1; break; }
 				}
 				else if (line == "[COMMON_STEPS]")
 				{
 					int retflag;
 					ReadCommonSteps(f, line, retflag);
-					if (retflag == 2) break;
+					if (retflag == 2) { ret = -1; break; }
 				}
 				else
 				{
@@ -89,26 +90,52 @@ int MacroFile::LoadMacroFile()
 
 	LOG("Finished reading: " + fileName);
 
-	return 0;
+	return ret;
+}
+
+int MacroFile::FindDung(std::string dungName)
+{
+	int ret = -1;
+	if (macroStepDB.empty())
+	{
+		LOG("macroStepDB is empty");
+	}
+	else
+	{
+		int i = 0;
+		for (MacroSteps dung : macroStepDB)
+		{
+			if (dung.dungName == dungName)
+			{
+				ret = i;
+				break;
+			}
+			++i;
+		}
+	}
+	return ret;
 }
 
 void MacroFile::ReadCommonSteps(std::ifstream &f, std::string &line, int &retflag)
 {
 	retflag = 1;
 
-	if (MacroStepDB.empty())
+	if (macroStepDB.empty())
 	{
 		MacroSteps mSteps = MacroSteps();
 		mSteps.dungName = ALL_DUNG_NAME;
-		MacroStepDB.push_back(mSteps);
+		macroStepDB.push_back(mSteps);
 	}
 
 	int allLocation = -1;
 	int i = 0;
-	for (MacroSteps dung : MacroStepDB)
+	for (MacroSteps dung : macroStepDB)
 	{
 		if (dung.dungName == ALL_DUNG_NAME)
+		{
 			allLocation = i;
+			break;
+		}
 		++i;
 	}
 	if (allLocation < 0)
@@ -131,7 +158,7 @@ void MacroFile::ReadCommonSteps(std::ifstream &f, std::string &line, int &retfla
 		}
 		else if (line.substr(0, 2) == "1_")
 		{
-			if (InsertMacroStep(MacroStepDB.at(allLocation).commonSteps, line) < 0)
+			if (InsertMacroStep(macroStepDB.at(allLocation).commonSteps, line) < 0)
 			{
 				LOG("Macro step insertion failed, line: " + line);
 				{ retflag = 2; return; };
@@ -142,7 +169,7 @@ void MacroFile::ReadCommonSteps(std::ifstream &f, std::string &line, int &retfla
 			LOG("Unexpected [COMMON_STEPS] line: " + line + "   ...skipping");
 		}
 	}
-	if (MacroStepDB.at(allLocation).commonSteps.empty())
+	if (macroStepDB.at(allLocation).commonSteps.empty())
 	{
 		LOG("[COMMON_STEPS] is empty" + line);
 	}
@@ -151,12 +178,12 @@ void MacroFile::ReadCommonSteps(std::ifstream &f, std::string &line, int &retfla
 void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retflag)
 {
 	retflag = 1;
-	if (MacroStepDB.empty())
+	if (macroStepDB.empty())
 	{
 		LOG("[UNIQUE_STEPS] found before first [DUNG_NAME]");
 		{ retflag = 2; return; };
 	}
-	if (MacroStepDB.at(MacroStepDB.size() - 1).sequentialSteps.empty())
+	if (macroStepDB.at(macroStepDB.size() - 1).sequentialSteps.empty())
 	{
 		LOG("[UNIQUE_STEPS] found before first [SEQUENTIAL_STEPS]");
 		{ retflag = 2; return; };
@@ -181,7 +208,7 @@ void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retfla
 				LOG("Line starting with '1_' should contain a name");
 				{ retflag = 2; return; };
 			}
-			if (InsertMacroStep(MacroStepDB.at(MacroStepDB.size() - 1).uniqueSteps, line) < 0)
+			if (InsertMacroStep(macroStepDB.at(macroStepDB.size() - 1).uniqueSteps, line) < 0)
 			{
 				LOG("Macro step insertion failed, line: " + line);
 				{ retflag = 2; return; };
@@ -197,7 +224,7 @@ void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retfla
 			{
 				continue;
 			}
-			if (!MacroStepExists(MacroStepDB.at(MacroStepDB.size() - 1).sequentialSteps, line.substr(2)))
+			if (FindStep(macroStepDB.at(macroStepDB.size() - 1).sequentialSteps, line.substr(2)) < 0)
 			{
 				LOG("Next Step not found in [SEQUENTIAL_STEPS], line: " + line);
 				{ retflag = 2; return; };
@@ -207,7 +234,7 @@ void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retfla
 				LOG("Next Step should be AFTER current step, line: " + line);
 				{ retflag = 2; return; };
 			}
-			if (InsertMacroStep(MacroStepDB.at(MacroStepDB.size() - 1).uniqueSteps, line) < 0)
+			if (InsertMacroStep(macroStepDB.at(macroStepDB.size() - 1).uniqueSteps, line) < 0)
 			{
 				LOG("Macro step insertion failed, line: " + line);
 				{ retflag = 2; return; };
@@ -222,7 +249,7 @@ void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retfla
 			LOG("Unexpected [SEQUENTIAL_STEPS] line: " + line);
 		}
 	}
-	if (MacroStepDB.at(MacroStepDB.size() - 1).sequentialSteps.empty())
+	if (macroStepDB.at(macroStepDB.size() - 1).sequentialSteps.empty())
 	{
 		LOG("[UNIQUE_STEPS] is empty" + line);
 		{ retflag = 2; return; };
@@ -232,7 +259,7 @@ void MacroFile::ReadUniqueSteps(std::ifstream &f, std::string &line, int &retfla
 void MacroFile::ReadSequentialSteps(std::ifstream &f, std::string &line, int &retflag)
 {
 	retflag = 1;
-	if (MacroStepDB.empty())
+	if (macroStepDB.empty())
 	{
 		LOG("[SEQUENTIAL_STEPS] found before first [DUNG_NAME]");
 		{ retflag = 2; return; };
@@ -252,7 +279,7 @@ void MacroFile::ReadSequentialSteps(std::ifstream &f, std::string &line, int &re
 		}
 		else if (line.substr(0, 2) == "1_")
 		{
-			if (InsertMacroStep(MacroStepDB.at(MacroStepDB.size() - 1).sequentialSteps, line) < 0)
+			if (InsertMacroStep(macroStepDB.at(macroStepDB.size() - 1).sequentialSteps, line) < 0)
 			{
 				LOG("Macro step insertion failed, line: " + line);
 				{ retflag = 2; return; };
@@ -263,7 +290,7 @@ void MacroFile::ReadSequentialSteps(std::ifstream &f, std::string &line, int &re
 			LOG("Unexpected [SEQUENTIAL_STEPS] line: " + line + "   ...skipping");
 		}
 	}
-	if (MacroStepDB.at(MacroStepDB.size() - 1).sequentialSteps.empty())
+	if (macroStepDB.at(macroStepDB.size() - 1).sequentialSteps.empty())
 	{
 		LOG("[SEQUENTIAL_STEPS] is empty" + line);
 		{ retflag = 2; return; };
@@ -274,7 +301,7 @@ void MacroFile::ReadDungName(std::ifstream &f, std::string &line, int &retflag)
 {
 	retflag = 1;
 	MacroSteps mSteps = MacroSteps();
-	MacroStepDB.push_back(mSteps);
+	macroStepDB.push_back(mSteps);
 	if (getline(f, line))
 	{
 		lineNo++;
@@ -290,7 +317,7 @@ void MacroFile::ReadDungName(std::ifstream &f, std::string &line, int &retflag)
 		}
 		else
 		{
-			MacroStepDB.at(MacroStepDB.size() - 1).dungName = line;
+			macroStepDB.at(macroStepDB.size() - 1).dungName = line;
 			{ retflag = 3; return; };
 		}
 	}
@@ -310,7 +337,7 @@ int MacroFile::InsertMacroStep(vector<MacroStep>& mSteps, std::string line)
 	{
 		string stepName = line.substr(2);
 		int stepId = -1;
-		int(*function)(void);
+		macroFuncType function;
 		stepId = GetMacroStepId(stepName);
 		function = GetMacroStepFunction(stepName);
 
@@ -358,39 +385,56 @@ int MacroFile::GetMacroStepId(std::string stepName)
 	return ret;
 }
 
-int(*MacroFile::GetMacroStepFunction(std::string stepName))(void)
+macroFuncType MacroFile::GetMacroStepFunction(std::string stepName)
 {
-	int(*ret)(void) = nullptr;
+	macroFuncType ret = nullptr;
 	if (MacroNames.count(stepName) > 0)
 		ret = MacroNames[stepName].second;
 	return ret;
 }
 
-bool MacroFile::MacroStepExists(std::vector<MacroStep>& mSteps, std::string stepName)
+int MacroFile::FindStep(std::vector<MacroStep>& mSteps, std::string stepName)
 {
-	bool ret = false;
+	int ret = -1;
 	int stepId = GetMacroStepId(stepName);
 	if (stepId < 0)
 	{
 		LOG("Couldn't find a step with a name " + stepName);
-		ret = false;
+		ret = -1;
 	}
 	else
 	{
-		for (MacroStep item : mSteps)
-		{
-			if (item.name == stepId)
-			{
-				ret = true;
-				break;
-			}
-		}
+		ret = FindStep(mSteps, stepId);
 	}
 	
 	return ret;
 }
 
-std::vector<MacroSteps>MacroFile::MacroStepDB = std::vector<MacroSteps>();
-std::map<std::string, std::pair<int, int(*)(void)> >MacroFile::MacroNames = std::map<std::string, std::pair<int, int(*)(void)> >();
+int MacroFile::FindStep(std::vector<MacroStep>& mSteps, int stepName)
+{
+	int ret = -1;
+	if (stepName < 0)
+	{
+		LOG("Couldn't find a step with negative id");
+	}
+	else
+	{
+		int i = 0;
+		for (MacroStep item : mSteps)
+		{
+			if (item.name == stepName)
+			{
+				ret = i;
+				break;
+			}
+			++i;
+		}
+	}
+
+	return ret;
+}
+
+std::vector<MacroSteps>MacroFile::macroStepDB = std::vector<MacroSteps>();
+std::map<std::string, std::pair<int, macroFuncType> >MacroFile::MacroNames = std::map<std::string, std::pair<int, macroFuncType> >();
 int MacroFile::lineNo = 0;
 const std::string MacroFile::ALL_DUNG_NAME = "ALL";
