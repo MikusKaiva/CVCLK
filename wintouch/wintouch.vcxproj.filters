@@ -27,6 +27,12 @@
     <Filter Include="Source Files\tests">
       <UniqueIdentifier>{466e9e26-8010-42a7-a16f-1dcf9314b53d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\macros">
+      <UniqueIdentifier>{87076e67-83ab-4e95-bfe2-cf8f745e4589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\macros">
+      <UniqueIdentifier>{caf79b92-d876-47ec-bc16-f962bae6cc04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_ui_init.cpp">
@@ -65,6 +71,12 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
+    <ClCompile Include="MacroFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroFunctions.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -99,6 +111,12 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroFunctions.h">
+      <Filter>Header Files\macros</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
