@@ -84,6 +84,8 @@
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MacroFile.cpp" />
+    <ClCompile Include="MacroFunctions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MouseControl.cpp" />
@@ -100,6 +102,8 @@
     <ClInclude Include="FFapp.h" />
     <ClInclude Include="FindImage.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="MacroFile.h" />
+    <ClInclude Include="MacroFunctions.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="MouseControl.h" />
     <ClInclude Include="Nox.h" />
