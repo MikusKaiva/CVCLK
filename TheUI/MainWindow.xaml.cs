@@ -11,7 +11,8 @@ namespace TheUI
     {
         private int index;
 
-        public ObservableCollection<LogEntry> LogEntries { get; set; }
+        public static ObservableCollection<LogEntry> LogEntries { get; set; }
+        public static ObservableCollection<string> MacroNames { get; set; }
 
         public wintouch()
         {
@@ -34,13 +35,33 @@ namespace TheUI
             timeString += time.Minute.ToString() + ":";
             if (time.Second <= 9) timeString += "0";
             timeString += time.Second.ToString() + "  ";
-            LogEntries.Add(new LogEntry() { Index = index++, DateTime = timeString, Message = msg });
+            if (null == System.Windows.Application.Current)
+            {
+                new System.Windows.Application();
+            }
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                LogEntries.Add(new LogEntry() { Index = index++, DateTime = timeString, Message = msg });
+                MacroNames.Add(timeString);
+            });
+            
         }
 
         private void Init()
         {
             DataContext = LogEntries = new ObservableCollection<LogEntry>();
+            lbxMacroName.DataContext = MacroNames = new ObservableCollection<string>();
         }
+
+        public Button GetBtn()
+        {
+            return btnStopMacro;
+        }
+    }
+
+    public class MacroName : PropertyChangedBase
+    {
+        public string Value { get; set; }
     }
 
     public class LogEntry : PropertyChangedBase
@@ -65,6 +86,48 @@ namespace TheUI
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }));
+        }
+    }
+
+    public static class AutoScrollHelper
+    {
+        public static readonly DependencyProperty AutoScrollProperty =
+            DependencyProperty.RegisterAttached("AutoScroll", typeof(bool), typeof(AutoScrollHelper), new PropertyMetadata(false, AutoScrollPropertyChanged));
+
+
+        public static void AutoScrollPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var scrollViewer = obj as ScrollViewer;
+            if (scrollViewer == null) return;
+
+            if ((bool)args.NewValue)
+            {
+                scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+                scrollViewer.ScrollToEnd();
+            }
+            else
+            {
+                scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
+            }
+        }
+
+        static void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (e.ViewportHeightChange > 0 || e.ExtentHeightChange > 0 || e.ViewportHeightChange < 0 || e.ExtentHeightChange < 0)
+            {
+                var scrollViewer = sender as ScrollViewer;
+                scrollViewer?.ScrollToEnd();
+            }
+        }
+
+        public static bool GetAutoScroll(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(AutoScrollProperty);
+        }
+
+        public static void SetAutoScroll(DependencyObject obj, bool value)
+        {
+            obj.SetValue(AutoScrollProperty, value);
         }
     }
 }

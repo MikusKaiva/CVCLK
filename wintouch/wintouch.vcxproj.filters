@@ -118,5 +118,8 @@
     <ClInclude Include="MacroFunctions.h">
       <Filter>Header Files\macros</Filter>
     </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files\general</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

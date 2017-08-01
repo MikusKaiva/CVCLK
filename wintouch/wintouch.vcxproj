@@ -97,6 +97,7 @@
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constants.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="DesktopCapture.h" />
     <ClInclude Include="FFapp.h" />
