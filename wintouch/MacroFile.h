@@ -53,6 +53,7 @@ public:
 	static std::vector<MacroSteps> macroStepDB;
 	static int FindDung(std::string dungName);
 	static int FindStep(std::vector<MacroStep>& mSteps, int stepName);
+	static const std::string ALL_DUNG_NAME;
 
 private:
 	static void ReadCommonSteps(std::ifstream &f, std::string &line, int &retflag);
@@ -66,7 +67,6 @@ private:
 	static macroFuncType GetMacroStepFunction(std::string stepName);
 	static std::map<std::string, std::pair<int, macroFuncType> > MacroNames;
 	static int lineNo;
-	static const std::string ALL_DUNG_NAME;
 };
 
 
