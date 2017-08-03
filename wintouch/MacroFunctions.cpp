@@ -5,6 +5,12 @@
 #include "MacroFile.h"
 #include "Log.h"
 
+#define STOP_THREAD -2
+#define PROCESS_PAUSE_AND_STOP if (ProcessPauseAndStop() == STOP_THREAD) return STOP_THREAD
+
+int MacroFunctions::isPaused = false;
+int MacroFunctions::isStopped = false;
+
 int MacroFunctions::Run(std::string dungName)
 {
 	int ret = -1;
@@ -18,14 +24,20 @@ int MacroFunctions::Run(std::string dungName)
 	if (dungIndex >= 0)
 	{
 		std::vector<MacroStep> uniqueSteps = MacroFile::macroStepDB[dungIndex].uniqueSteps;
-		for (MacroStep uniqueStep : uniqueSteps)
+		std::vector<MacroStep>::iterator uniqueStep = uniqueSteps.begin();
+		while ( true )
 		{
 			Sleep(100);
-			if (uniqueStep.function() == 0)
+			ret = MacroFuncCaller(uniqueStep->function);
+			if (ret == 0)
 			{
 				failures = 0;
-				if (uniqueStep.nextStepName >= 0)
-					RunSequential(MacroFile::macroStepDB[dungIndex].sequentialSteps, uniqueStep.nextStepName);
+				if (uniqueStep->nextStepName >= 0)
+					RunSequential(MacroFile::macroStepDB[dungIndex].sequentialSteps, uniqueStep->nextStepName);
+			}
+			else if (ret == STOP_THREAD)
+			{
+				break;
 			}
 			else
 			{
@@ -36,7 +48,8 @@ int MacroFunctions::Run(std::string dungName)
 				LOG("Max Failure count reached, stopping.. " + dungName);
 				break;
 			}
-			break;
+			++uniqueStep;
+			if (uniqueStep == uniqueSteps.end()) uniqueStep = uniqueSteps.begin();
 		}
 	}
 	return ret;
@@ -59,18 +72,41 @@ int MacroFunctions::RunSequential(std::vector<MacroStep>& sequentialSteps, int s
 	if (ret == 0)
 	{
 		std::vector<MacroStep>::iterator sequentalStep = sequentialSteps.begin();
-		while (sequentalStep != sequentialSteps.end() && sequentalStep->function() == 0)
+		while (MacroFuncCaller(sequentalStep->function) == 0)
 		{
 			Sleep(100);
 			++sequentalStep;
-			//if (sequentalStep == sequentialSteps.end()) sequentalStep = sequentialSteps.begin();
+			if (sequentalStep == sequentialSteps.end()) sequentalStep = sequentialSteps.begin();
 		}
 	}
 
 	return ret;
 }
+
+
+int MacroFunctions::MacroFuncCaller(macroFuncType function)
+{
+	PROCESS_PAUSE_AND_STOP;
+
+	function();
+	return 0;
+}
+
 int MacroFunctions::IsNoxPresent()
 {
 	LOG("IsNoxPresent");
+	return 0;
+}
+
+int MacroFunctions::ProcessPauseAndStop()
+{
+	if (isStopped)
+		return STOP_THREAD;
+	while (isPaused)
+	{
+		Sleep(250);
+		if (isStopped)
+			return STOP_THREAD;
+	}
 	return 0;
 }

@@ -42,7 +42,7 @@ namespace ManagedCode
 	{
 		Nox nox = Nox();
 		nox.DetermineLocation();
-		TestUiInit();
+		//TestUiInit();
 		//TestCliWrap();
 		return 0;
 	}

@@ -16,6 +16,7 @@ namespace TheUI
         public static ObservableCollection<LogEntry> LogEntries { get; set; }
         public static ObservableCollection<string> MacroNames { get; set; }
         public static ObservableBool PanelEnabled { get; set; }
+        public static ObservableControlStates ControlStates { get; set; }
 
         public wintouch()
         {
@@ -70,14 +71,25 @@ namespace TheUI
             return ret;
         }
 
+        public ObservableControlStates.StateEnum GetState()
+        {
+            return ControlStates.State;
+        }
+
+        public void SetState(ObservableControlStates.StateEnum state)
+        {
+            ControlStates.State = state;
+        }
+
         private void Init()
         {
             DataContext = LogEntries = new ObservableCollection<LogEntry>();
             lbxMacroName.DataContext = MacroNames = new ObservableCollection<string>();
             PanelEnabled = new ObservableBool() { Value = false };
+            ControlStates = new ObservableControlStates { State = ObservableControlStates.StateEnum.Stopped };
         }
 
-        public Button GetBtn()
+        public Button GetStopBtn()
         {
             return btnStopMacro;
         }
@@ -87,14 +99,9 @@ namespace TheUI
             return btnRunMacro;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Clear_Log(object sender, RoutedEventArgs e)
         {
-            PanelEnabled.Value = false ;
-        }
-
-        private void btnStopMacro_Click(object sender, RoutedEventArgs e)
-        {
-            btnRunMacro.IsChecked = false;
+            LogEntries.Clear();
         }
     }
 
@@ -122,28 +129,26 @@ namespace TheUI
                 switch (value)
                 {
                     case StateEnum.Stopped:
-                        RunPauseBtnChecked = false;
                         RunPauseBtnText = "Run!";
                         StopBtnEnabled = false;
                         MacroListEnabled = true;
+                        RunPauseBtnChecked = false;
                         break;
                     case StateEnum.Running:
-                        RunPauseBtnChecked = true;
                         RunPauseBtnText = "Pause!";
                         StopBtnEnabled = true;
                         MacroListEnabled = false;
+                        RunPauseBtnChecked = true;
                         break;
                     case StateEnum.Paused:
-                        RunPauseBtnChecked = false;
                         RunPauseBtnText = "Resume!";
                         StopBtnEnabled = true;
                         MacroListEnabled = false;
+                        RunPauseBtnChecked = false;
                         break;
                     default:
                         break;
                 }
-
-                OnPropertyChanged("State");
             }
         }
         public bool RunPauseBtnChecked { get => runPauseBtnChecked; set { runPauseBtnChecked = value; OnPropertyChanged("RunPauseBtnChecked"); } }
@@ -168,11 +173,6 @@ namespace TheUI
         public string DateTime { get; set; }
         public int Index { get; set; }
         public string Message { get; set; }
-    }
-
-    public class CollapsibleLogEntry : LogEntry
-    {
-        public List<LogEntry> Contents { get; set; }
     }
 
     public class PropertyChangedBase : INotifyPropertyChanged

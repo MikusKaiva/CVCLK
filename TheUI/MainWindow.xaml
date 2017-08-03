@@ -35,30 +35,6 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Text="{Binding DateTime}" Grid.Column="0" BorderThickness="0" IsReadOnly="True"
-                       Margin="5,0,5,0" Background="White"/>
-
-                <TextBox Text="" Grid.Column="1" BorderThickness="0" IsReadOnly="True"
-                       Margin="0,0,2,0" Background="White"/>
-
-                <TextBox Text="{Binding Message}" Grid.Column="2" BorderThickness="0" IsReadOnly="True"
-                       TextWrapping="Wrap" Background="White"/>
-            </Grid>
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type local:CollapsibleLogEntry}">
-            <Grid IsSharedSizeScope="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition SharedSizeGroup="Index" Width="Auto"/>
-                    <ColumnDefinition SharedSizeGroup="Date" Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
                 <TextBlock Text="{Binding DateTime}" Grid.Column="0"
                        Margin="5,0,5,0" Background="White"/>
 
@@ -66,31 +42,17 @@
                        Margin="0,0,2,0" Background="White"/>
 
                 <TextBlock Text="{Binding Message}" Grid.Column="2"
-                       TextWrapping="Wrap" Background="White" />
-
-                <ToggleButton x:Name="Expander" Grid.Row="1" Grid.Column="0"
-                          VerticalAlignment="Top" Content="+" HorizontalAlignment="Right"/>
-
-                <ItemsControl ItemsSource="{Binding Contents}" Style="{StaticResource LogViewerStyle}"
-                          Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                          x:Name="Contents" Visibility="Collapsed"/>
-
+                       TextWrapping="Wrap" Background="White"/>
             </Grid>
-            <DataTemplate.Triggers>
-                <Trigger SourceName="Expander" Property="IsChecked" Value="True">
-                    <Setter TargetName="Contents" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="Expander" Property="Content" Value="-"/>
-                </Trigger>
-            </DataTemplate.Triggers>
         </DataTemplate>
+
     </Page.Resources>
 
-    <DockPanel Name="mainPanel" LastChildFill="False" 
+    <DockPanel Name="mainPanel"
                IsEnabled ="{Binding Path=PanelEnabled.Value, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
         <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
             <Label                 Width="50" Content="NOX:"    HorizontalContentAlignment="Right" />
             <Label Name="noxLabel" Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
-            <!--<Button Width="20" Height="20" Click="Button_Click" />-->
         </StackPanel>
         <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
             <Label                 Width="50" Content="FF:"     HorizontalContentAlignment="Right" />
@@ -98,31 +60,24 @@
         </StackPanel>
         <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
             <Label                 Width="50" Content="Macro:"     HorizontalContentAlignment="Right" />
-            <ComboBox Name="lbxMacroName" Height="20" Width="170" HorizontalContentAlignment="Left" 
-                      ItemsSource="{Binding}" SelectedIndex="0" 
-                      IsEnabled="{Binding Path=IsChecked, ElementName=btnRunMacro, Converter={StaticResource InverseBooleanConverter}}"
-                      />
-            <ToggleButton Name ="btnRunMacro" Width="50" Height="20">
-                <ToggleButton.Resources>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Content" Value="Pause!" />
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Content" Value="Run!" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Resources>
-            </ToggleButton>
-            <Button Name="btnStopMacro" Width="50" Height="20" Content="Stop!" 
-                    IsEnabled="{Binding Path=IsChecked, ElementName=btnRunMacro}"
-                    Click="btnStopMacro_Click"
-                    />
+            <ComboBox
+                Name="lbxMacroName" Height="20" Width="170" HorizontalContentAlignment="Left"
+                ItemsSource="{Binding}" SelectedIndex="0"
+                IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                />
+            <ToggleButton
+                Name ="btnRunMacro" Width="50" Height="20"
+                IsChecked="{Binding Path=ControlStates.RunPauseBtnChecked, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                Content=  "{Binding Path=ControlStates.RunPauseBtnText   , RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                />
+            <Button
+                Name="btnStopMacro" Width="50" Height="20" Content="Stop!"
+                IsEnabled ="{Binding Path=ControlStates.StopBtnEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                />
         </StackPanel>
-        <Grid Height="200" DockPanel.Dock="Bottom" >
-            <ItemsControl ItemsSource="{Binding}" Style="{StaticResource LogViewerStyle}">
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <Button Width="50" Height="20" Content="Clear" Click="Clear_Log" DockPanel.Dock="Bottom" HorizontalAlignment="Right"/>
+            <ItemsControl ItemsSource="{Binding}" Style="{StaticResource LogViewerStyle}" >
                 <ItemsControl.Template>
                     <ControlTemplate>
                         <ScrollViewer CanContentScroll="True" local:AutoScrollHelper.AutoScroll="True">
@@ -136,6 +91,6 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-        </Grid>
+        </DockPanel>
     </DockPanel>
 </Page>
