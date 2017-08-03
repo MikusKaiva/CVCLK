@@ -3,6 +3,7 @@
 #include "test_cli_wrap.h"
 #include "test_ui_init.h"
 #include "Nox.h"
+#include "UiInit.h"
 
 namespace ManagedCode
 {
@@ -33,6 +34,7 @@ namespace ManagedCode
 
 	int InitApp()
 	{
+		UiInit::Init();
 		return 0;
 	}
 

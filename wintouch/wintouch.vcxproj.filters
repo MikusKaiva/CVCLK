@@ -77,6 +77,9 @@
     <ClCompile Include="MacroFunctions.cpp">
       <Filter>Source Files\macros</Filter>
     </ClCompile>
+    <ClCompile Include="UiInit.cpp">
+      <Filter>Source Files\general</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -117,6 +120,12 @@
     </ClInclude>
     <ClInclude Include="MacroFunctions.h">
       <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="UiInit.h">
+      <Filter>Header Files\general</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

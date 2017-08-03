@@ -1,6 +1,7 @@
 #include "Nox.h"
 #include <opencv2/opencv.hpp>
 #include "DesktopCapture.h"
+#include "constants.h"
 #include "FindImage.h"
 #include "FFapp.h"
 #include "Log.h"
@@ -9,7 +10,7 @@ using namespace cv;
 
 int Nox::Start() { return 0; }
 int Nox::StartApp(std::string appName) { return 0; }
-bool Nox::IsRunning() { return true; }
+bool Nox::IsRunning() { return DetermineLocation() == 0; }
 int Nox::DetermineLocation() 
 {
 	const int WIDTH = 591;
@@ -26,10 +27,10 @@ int Nox::DetermineLocation()
 
 	if (res == 0)
 	{
-		templ = imread("images/nox.png", IMREAD_COLOR);
+		templ = imread(NOX, IMREAD_COLOR);
 		if (templ.empty())
 		{
-			LOG("Image 'images/nox.png' not found");
+			LOG("Image '" NOX  "' not found");
 			res = -1;
 		}
 	}

@@ -94,9 +94,11 @@
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="test_ui_init.cpp" />
+    <ClCompile Include="UiInit.cpp" />
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constants.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="DesktopCapture.h" />
     <ClInclude Include="FFapp.h" />
@@ -109,6 +111,7 @@
     <ClInclude Include="Nox.h" />
     <ClInclude Include="test_cli_wrap.h" />
     <ClInclude Include="test_ui_init.h" />
+    <ClInclude Include="UiInit.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
