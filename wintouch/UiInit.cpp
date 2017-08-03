@@ -68,7 +68,6 @@ void UiInit::OnRunResumeBtnClick(System::Object ^sender, System::Windows::Routed
 	std::string dungName = msclr::interop::marshal_as<std::string>(cliDung);
 	if (ManagedCode::ManagedGlobals::w->GetState() == TheUI::ObservableControlStates::StateEnum::Stopped)
 	{
-		LOG("Starting: " + dungName);
 		unsigned tid; // thread ID
 		_beginthreadex(NULL, 0, RunMacroThread, (void *)NULL, 0, &tid);
 	}

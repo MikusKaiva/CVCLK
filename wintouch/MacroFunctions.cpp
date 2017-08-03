@@ -33,13 +33,15 @@ int MacroFunctions::Run(std::string dungName)
 			{
 				failures = 0;
 				if (uniqueStep->nextStepName >= 0)
-					RunSequential(MacroFile::macroStepDB[dungIndex].sequentialSteps, uniqueStep->nextStepName);
+				{
+					ret = RunSequential(MacroFile::macroStepDB[dungIndex].sequentialSteps, uniqueStep->nextStepName);
+				}
 			}
-			else if (ret == STOP_THREAD)
+			if (ret == STOP_THREAD)
 			{
 				break;
 			}
-			else
+			else if (ret < 0)
 			{
 				++failures;
 			}
@@ -72,11 +74,13 @@ int MacroFunctions::RunSequential(std::vector<MacroStep>& sequentialSteps, int s
 	if (ret == 0)
 	{
 		std::vector<MacroStep>::iterator sequentalStep = sequentialSteps.begin();
-		while (MacroFuncCaller(sequentalStep->function) == 0)
+		ret = MacroFuncCaller(sequentalStep->function);
+		while (ret == 0)
 		{
 			Sleep(100);
 			++sequentalStep;
 			if (sequentalStep == sequentialSteps.end()) sequentalStep = sequentialSteps.begin();
+			ret = MacroFuncCaller(sequentalStep->function);
 		}
 	}
 
