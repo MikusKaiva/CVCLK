@@ -9,19 +9,19 @@ using namespace std;
 // Register New macros that can be used in macros.dat file here.
 int MacroFile::InitMacroNames()
 {
-	MacroNames["ClickDungeon"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickNextStep"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickNoCompanionStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickDepartStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickRepeatStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickResultsItemsStep"			] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickConnectionErrorStep"		] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
-	MacroNames["ClickDailyQuestCompletedStep"	] = std::pair<int, macroFuncType>(ClickDungeon, MacroFunctions::IsNoxPresent);
+	MacroNames["ClickEarthShrine_Exit"			] = std::pair<int, macroFuncType>(ClickEarthShrine_Exit	, MacroFunctions::ClickEarthShrine_Exit	);
+	MacroNames["ClickNextStep"					] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickNoCompanionStep"			] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickDepartStep"				] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickRepeatStep"				] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickResultsItemsStep"			] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickConnectionErrorStep"		] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
+	MacroNames["ClickDailyQuestCompletedStep"	] = std::pair<int, macroFuncType>(ClickDungeon			, MacroFunctions::IsNoxPresent			);
 	return 0;
 }
 

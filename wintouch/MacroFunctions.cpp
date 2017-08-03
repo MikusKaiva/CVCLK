@@ -4,6 +4,8 @@
 
 #include "MacroFile.h"
 #include "Log.h"
+#include "DungeonLocator.h"
+#include "constants.h"
 
 #define STOP_THREAD -2
 #define PROCESS_PAUSE_AND_STOP if (ProcessPauseAndStop() == STOP_THREAD) return STOP_THREAD
@@ -87,6 +89,18 @@ int MacroFunctions::RunSequential(std::vector<MacroStep>& sequentialSteps, int s
 	return ret;
 }
 
+int MacroFunctions::ProcessPauseAndStop()
+{
+	if (isStopped)
+		return STOP_THREAD;
+	while (isPaused)
+	{
+		Sleep(250);
+		if (isStopped)
+			return STOP_THREAD;
+	}
+	return 0;
+}
 
 int MacroFunctions::MacroFuncCaller(macroFuncType function)
 {
@@ -102,15 +116,19 @@ int MacroFunctions::IsNoxPresent()
 	return 0;
 }
 
-int MacroFunctions::ProcessPauseAndStop()
+int MacroFunctions::ClickEarthShrine_Exit()
 {
-	if (isStopped)
-		return STOP_THREAD;
-	while (isPaused)
+	if (DungeonLocator::IsDung(E_SHRINE_EXIT))
 	{
-		Sleep(250);
-		if (isStopped)
-			return STOP_THREAD;
+		//if (HasEnergy() < 0)
+		//{
+		//	Sleep(300 * 1000); // 5 minutes
+		//}
+		if (DungeonLocator::ClickLastDung() == 0);
+		{
+			Sleep(1000);
+			return 0;
+		}
 	}
-	return 0;
+	return -1;
 }

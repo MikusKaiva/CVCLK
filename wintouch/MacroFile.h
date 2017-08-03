@@ -10,6 +10,7 @@ enum ActionStepType
 {
 	ClickConnectionErrorStep
 	, ClickDailyQuestCompletedStep
+	, ClickEarthShrine_Exit
 	, ClickDungeon
 	, ClickNextStep
 	, ClickNoCompanionStep

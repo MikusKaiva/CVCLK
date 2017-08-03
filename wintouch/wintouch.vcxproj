@@ -79,6 +79,8 @@
   <ItemGroup>
     <ClCompile Include="Coords.cpp" />
     <ClCompile Include="DesktopCapture.cpp" />
+    <ClCompile Include="DungeonLocator.cpp" />
+    <ClCompile Include="Energy.cpp" />
     <ClCompile Include="FFapp.cpp" />
     <ClCompile Include="FindImage.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
@@ -101,6 +103,8 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="DesktopCapture.h" />
+    <ClInclude Include="DungeonLocator.h" />
+    <ClInclude Include="Energy.h" />
     <ClInclude Include="FFapp.h" />
     <ClInclude Include="FindImage.h" />
     <ClInclude Include="Log.h" />

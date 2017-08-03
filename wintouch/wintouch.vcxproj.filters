@@ -80,6 +80,12 @@
     <ClCompile Include="UiInit.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
+    <ClCompile Include="DungeonLocator.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="Energy.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -126,6 +132,12 @@
     </ClInclude>
     <ClInclude Include="UiInit.h">
       <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonLocator.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="Energy.h">
+      <Filter>Header Files\gme</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

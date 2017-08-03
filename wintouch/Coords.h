@@ -27,6 +27,9 @@ public:
 	int GetAbsMidX();
 	int GetAbsMidY();
 
+	int GetWidth();
+	int GetHeight();
+
 private:
 	int x1, x2, y1, y2, offsetX, offsetY;
 };
