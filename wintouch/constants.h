@@ -10,3 +10,9 @@
 #define IMG_E_SHRINE_EXIT "images/earth_shrine_exit.png"
 
 // Image names
+#define IMG_NO_ENE_MSG		"images/no_ene_msg.png"
+#define IMG_CONNECTION_ERR	"images/connection_error.png"
+#define IMG_DAILY_QUEST		"images/daily_quest.png"
+#define IMG_MISSIONS_NEXT	"images/missions_next.png"
+#define IMG_SLIDER			"images/slider.png"
+#define IMG_DEPART			"images/depart.png"

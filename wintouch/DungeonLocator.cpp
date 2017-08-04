@@ -7,7 +7,11 @@
 #include "Log.h"
 #include "FindImage.h"
 #include "MouseControl.h"
-#include "DesktopCapture.h"
+#include "Energy.h"
+#include "Missions.h"
+#include "NoCompanion.h"
+#include "Depart.h"
+#include "Attack.h"
 
 using namespace cv;
 using namespace std;
@@ -34,6 +38,11 @@ int DungeonLocator::DetermineLocation()
 		y2 += spaceBetween;
 		coords.push_back(Coords(x1, y1, x2, y2, offsetX, offsetY));
 	}
+	Energy::DetermineLocation();
+	Missions::DetermineLocation();
+	NoCompanion::DetermineLocation();
+	Depart::DetermineLocation();
+	Attack::DetermineLocation();
 	
 	return 0;
 }
@@ -58,35 +67,12 @@ bool DungeonLocator::IsDung(std::string dungName)
 		return false;
 	}
 
-	Mat templ, src;
-	int res = -1;
 	int x1 = coords[coordIndex].GetAbsX1(); 
 	int y1 = coords[coordIndex].GetAbsY1();
 	int x2 = coords[coordIndex].GetAbsX2();
 	int y2 = coords[coordIndex].GetAbsY2();
 
-	res = GetPartOfDesktop(src,x1, y1, x2, y2);
-
-	if (res != 0) 
-		LOG("Failed to get Part Of Desktop");
-
-	if (res == 0)
-	{
-		templ = imread(templName, IMREAD_COLOR);
-		if (templ.empty())
-		{
-			LOG("Image '" + templName  + "' not found");
-			res = -1;
-		}
-	}
-
-	if (res == 0)
-	{
-		res = FindImage(templ, src, x1, y1, x2, y2);
-		if (res != 0) LOG("Image not found in area");
-	}
-
-	if (res == 0)
+	if (FindImageInPartOfDesktop(templName, x1, y1, x2, y2) == 0)
 	{
 		return true;
 	}

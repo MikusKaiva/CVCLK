@@ -1,6 +1,8 @@
 #include "FFapp.h"
 #include "Nox.h"
 #include "DungeonLocator.h"
+#include "ConnectionError.h"
+#include "DailyQuestCompleted.h"
 
 bool FFapp::IsTitleScreen() { return false; }
 bool FFapp::IsHomeScreen() { return false; }
@@ -13,6 +15,8 @@ int FFapp::DetermineLocation()
 	coords.SetX(Nox::coords.GetX1(), Nox::coords.GetX2() - Nox::RIGHT_BAR_WIDTH);
 	coords.SetY(Nox::coords.GetY1() + Nox::TOP_BAR_HEIGHT, Nox::coords.GetY2());
 	DungeonLocator::DetermineLocation();
+	ConnectionError::DetermineLocation();
+	DailyQuestCompleted::DetermineLocation();
 
 	return 0;
 }

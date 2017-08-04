@@ -5,7 +5,7 @@
 typedef int(*macroFuncType)(void);
 
 struct MacroStep;
-static public class MacroFunctions
+public class MacroFunctions
 {
 public:
 	static int Run(std::string dungName);
@@ -20,7 +20,15 @@ private:
 
 public:
 	static int IsNoxPresent();
+	static int Wait(int miliSeconds);
 	static int ClickEarthShrine_Exit();
+	static int ClickConnectionError();
+	static int ClickDailyQuestCompletedStep();
+	static int ClickMissions();
+	static int ClickNoCompanion();
+	static int ClickDepart();
+	static int WaitAttack();
+	static int ClickAttack();
 };
 
 

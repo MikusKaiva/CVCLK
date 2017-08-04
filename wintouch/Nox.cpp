@@ -41,7 +41,7 @@ int Nox::DetermineLocation()
 		if (res != 0) LOG("Nox not found on desktop");
 	}
 
-	if (res == 0 && (x1 != coords.GetAbsX1() || x2 != coords.GetAbsX2() || y1 != coords.GetAbsY1() || y2 != coords.GetAbsY2()))
+	if (res == 0 && (x1 != coords.GetAbsX1() || y1 != coords.GetAbsY1()))
 	{
 		coords.SetOffset(x1, y1);
 		coords.SetAbsX(x1, x1 + WIDTH);
@@ -53,6 +53,6 @@ int Nox::DetermineLocation()
 	return res;
 }
 
-Coords Nox::coords = Coords(0, 0, 360, 640, 0, 0);
+Coords Nox::coords = Coords(-1, -1, 360, 640, 0, 0);
 const int Nox::TOP_BAR_HEIGHT = 35;
 const int Nox::RIGHT_BAR_WIDTH = 38;
