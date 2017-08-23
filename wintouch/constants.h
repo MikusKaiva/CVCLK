@@ -16,3 +16,6 @@
 #define IMG_MISSIONS_NEXT	"images/missions_next.png"
 #define IMG_SLIDER			"images/slider.png"
 #define IMG_DEPART			"images/depart.png"
+#define IMG_REPEAT			"images/repeat.png"
+#define IMG_REPEAT			"images/repeat_disabled.png"
+#define IMG_REPEAT_DISABLED	"images/repeat_disabled.png"
