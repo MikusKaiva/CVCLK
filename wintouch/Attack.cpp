@@ -67,6 +67,11 @@ int Attack::DetermineLocation()
 	return 0;
 }
 
+bool Attack::IsMsg()
+{
+	return IsRepeat() || IsRepeatDisabled();
+}
+
 bool Attack::IsRepeat()
 {
 	int x1 = coordsMsgSearchArea.GetAbsX1();
@@ -81,7 +86,7 @@ bool Attack::IsRepeat()
 
 	return false;
 }
-
+   
 bool Attack::IsRepeatDisabled()
 {
 	int x1 = coordsMsgSearchArea.GetAbsX1();

@@ -12,6 +12,7 @@
 #include "NoCompanion.h"
 #include "Depart.h"
 #include "Attack.h"
+#include "ResultsGil.h"
 
 using namespace cv;
 using namespace std;
@@ -43,6 +44,7 @@ int DungeonLocator::DetermineLocation()
 	NoCompanion::DetermineLocation();
 	Depart::DetermineLocation();
 	Attack::DetermineLocation();
+	ResultsGil::DetermineLocation();
 	
 	return 0;
 }

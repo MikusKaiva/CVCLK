@@ -13,9 +13,8 @@ int MacroFile::InitMacroNames()
 	MacroNames["ClickMissionsStep"				] = std::pair<int, macroFuncType>(ClickMissionsStep				, MacroFunctions::ClickMissions					);
 	MacroNames["ClickNoCompanionStep"			] = std::pair<int, macroFuncType>(ClickNoCompanionStep			, MacroFunctions::ClickNoCompanion				);
 	MacroNames["ClickDepartStep"				] = std::pair<int, macroFuncType>(ClickDepartStep				, MacroFunctions::ClickDepart					);
-	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(WaitAttackStep				, MacroFunctions::IsNoxPresent					);
-	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickAttackStep				, MacroFunctions::IsNoxPresent					);
-	MacroNames["ClickRepeatStep"				] = std::pair<int, macroFuncType>(ClickRepeatStep				, MacroFunctions::IsNoxPresent					);
+	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(WaitAttackStep				, MacroFunctions::WaitAttack					);
+	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickAttackStep				, MacroFunctions::ClickAttack					);
 	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(WaitResultsStep				, MacroFunctions::IsNoxPresent					);
 	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickResultsGilStep			, MacroFunctions::IsNoxPresent					);
 	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickResultsExpStep			, MacroFunctions::IsNoxPresent					);

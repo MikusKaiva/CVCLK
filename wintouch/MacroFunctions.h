@@ -29,6 +29,8 @@ public:
 	static int ClickDepart();
 	static int WaitAttack();
 	static int ClickAttack();
+	static int WaitResults();
+	static int ClickResultsGil();
 };
 
 

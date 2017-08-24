@@ -7,6 +7,7 @@ public class Attack
 {
 public:
 	static int DetermineLocation();
+	static bool IsMsg();
 	static bool IsRepeat();
 	static bool IsRepeatDisabled();
 	static int ClickBtnRepeat();

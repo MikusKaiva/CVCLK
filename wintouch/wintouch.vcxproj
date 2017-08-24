@@ -98,6 +98,7 @@
     <ClCompile Include="MouseControl.cpp" />
     <ClCompile Include="NoCompanion.cpp" />
     <ClCompile Include="Nox.cpp" />
+    <ClCompile Include="ResultsGil.cpp" />
     <ClCompile Include="test_cli_wrap.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
@@ -125,6 +126,7 @@
     <ClInclude Include="MouseControl.h" />
     <ClInclude Include="NoCompanion.h" />
     <ClInclude Include="Nox.h" />
+    <ClInclude Include="ResultsGil.h" />
     <ClInclude Include="test_cli_wrap.h" />
     <ClInclude Include="test_ui_init.h" />
     <ClInclude Include="UiInit.h" />

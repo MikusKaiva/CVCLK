@@ -14,6 +14,7 @@
 #include "NoCompanion.h"
 #include "Depart.h"
 #include "Attack.h"
+#include "ResultsGil.h"
 
 #define STOP_THREAD -2
 #define PROCESS_PAUSE_AND_STOP if (ProcessPauseAndStop() == STOP_THREAD) return STOP_THREAD
@@ -292,15 +293,90 @@ int MacroFunctions::WaitAttack()
 
 int MacroFunctions::ClickAttack()
 {
-	/*while (Attack::IsMsg() ||)
+	int ret = -1;
+	bool clickChars = true;
 
-	if (Depart::IsMsg())
+	do
 	{
-		if (Depart::ClickBtnDepart() == 0)
+		if (Attack::IsRepeatDisabled())
 		{
-			return Wait(3000);
+			ret = Wait(200);
 		}
-	}*/
-	return -1;
+		else if (Attack::IsRepeat())
+		{
+			ret = Attack::ClickBtnRepeat();
+			if (clickChars && ret == 0)
+			{
+				Sleep(200);
+				ret = Attack::ClickChars();
+				clickChars = false;
+			}
+			if (ret == 0)
+				ret = Wait(1000);
+		}
+		else 
+		{
+			break;
+		}
+	} while (ret == 0);
+
+	return ret;
+}
+
+int MacroFunctions::WaitResults()
+{
+	int ret = -1;
+	int howLong = 15;
+
+	while (howLong >= 0)
+	{
+		if (ResultsGil::IsMsg())
+		{
+			ret = 0;
+			break;
+		}
+		ret = ClickConnectionError();
+		if (ret == 0)
+		{
+			howLong = 10;
+			continue;
+		}
+		if (ret == STOP_THREAD)
+		{
+			break;
+		}
+		howLong--;
+		ret = Wait(1000);
+		if (ret != 0)
+		{
+			break;
+		}
+		ret = -1;
+	}
+	return ret;
+}
+
+int MacroFunctions::ClickResultsGil()
+{
+	int ret = -1;
+	if (ResultsGil::IsMsg())
+	{
+
+		ret = ResultsGil::ClickResultsGil();
+		int i = 0;
+		while (ret == 0 && ++i <= 3)
+		{
+			ret = Wait(500);
+			if (ret == 0) ret = ResultsGil::ClickResultsGil();
+		}
+
+		//TODO: click NextButton
+
+		if (ret == 0)
+		{
+			ret = Wait(1000);
+		}
+	}
+	return ret;
 }
 

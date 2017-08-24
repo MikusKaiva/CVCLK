@@ -16,7 +16,6 @@ enum ActionStepType
 	, ClickDepartStep
 	, WaitAttackStep
 	, ClickAttackStep
-	, ClickRepeatStep
 	, WaitResultsStep
 	, ClickResultsGilStep
 	, ClickResultsExpStep

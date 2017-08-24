@@ -110,6 +110,9 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Source Files\ClickObjects</Filter>
     </ClCompile>
+    <ClCompile Include="ResultsGil.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -179,6 +182,9 @@
       <Filter>Header Files\ClickObjects</Filter>
     </ClInclude>
     <ClInclude Include="Attack.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsGil.h">
       <Filter>Header Files\ClickObjects</Filter>
     </ClInclude>
   </ItemGroup>
