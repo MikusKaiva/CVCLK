@@ -212,7 +212,7 @@ namespace TheUI
 
         static void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (e.ViewportHeightChange > 0 || e.ExtentHeightChange > 0 || e.ViewportHeightChange < 0 || e.ExtentHeightChange < 0)
+            if (/*e.ViewportHeightChange > 0 || */e.ExtentHeightChange > 0 || /*e.ViewportHeightChange < 0 || */e.ExtentHeightChange < 0)
             {
                 var scrollViewer = sender as ScrollViewer;
                 scrollViewer?.ScrollToEnd();

@@ -15,6 +15,8 @@
 #include "Depart.h"
 #include "Attack.h"
 #include "ResultsGil.h"
+#include "ResultsExp.h"
+#include "ResultsItems.h"
 
 #define STOP_THREAD -2
 #define PROCESS_PAUSE_AND_STOP if (ProcessPauseAndStop() == STOP_THREAD) return STOP_THREAD
@@ -361,16 +363,17 @@ int MacroFunctions::ClickResultsGil()
 	int ret = -1;
 	if (ResultsGil::IsMsg())
 	{
-
-		ret = ResultsGil::ClickResultsGil();
 		int i = 0;
-		while (ret == 0 && ++i <= 3)
+		do
 		{
-			ret = Wait(500);
-			if (ret == 0) ret = ResultsGil::ClickResultsGil();
-		}
+			ret = ResultsGil::ClickResultsGil();
+			if (ret == 0) ret = Wait(500);
+		} while (ret == 0 && ++i <= 3);
 
-		//TODO: click NextButton
+		if (ret == 0)
+		{
+			ResultsGil::ClickNextBtn();
+		}
 
 		if (ret == 0)
 		{
@@ -380,3 +383,40 @@ int MacroFunctions::ClickResultsGil()
 	return ret;
 }
 
+int MacroFunctions::ClickResultsExp()
+{
+	int ret = -1;
+	if (ResultsExp::IsMsg())
+	{
+		if (ResultsExp::ClickResultsExp() == 0)
+		{
+			return Wait(1000);
+		}
+	}
+	return -1;
+}
+
+int MacroFunctions::ClickResultsItems()
+{
+	int ret = -1;
+	if (ResultsItems::IsMsg())
+	{
+		ret = ResultsItems::ClickResultsItems();
+
+		if (ret == 0)
+		{
+			ret = Wait(2000);
+		}
+
+		if (ret == 0)
+		{
+			ResultsItems::ClickNextBtn();
+		}
+
+		if (ret == 0)
+		{
+			ret = Wait(3000);
+		}
+	}
+	return ret;
+}

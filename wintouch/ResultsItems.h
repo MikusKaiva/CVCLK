@@ -2,12 +2,12 @@
 
 #include "Coords.h"
 
-public class ResultsGil
+public class ResultsItems
 {
 public:
 	static int DetermineLocation();
 	static bool IsMsg();
-	static int ClickResultsGil();
+	static int ClickResultsItems();
 	static int ClickNextBtn();
 
 private:

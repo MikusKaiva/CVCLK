@@ -15,10 +15,10 @@ int MacroFile::InitMacroNames()
 	MacroNames["ClickDepartStep"				] = std::pair<int, macroFuncType>(ClickDepartStep				, MacroFunctions::ClickDepart					);
 	MacroNames["WaitAttackStep"					] = std::pair<int, macroFuncType>(WaitAttackStep				, MacroFunctions::WaitAttack					);
 	MacroNames["ClickAttackStep"				] = std::pair<int, macroFuncType>(ClickAttackStep				, MacroFunctions::ClickAttack					);
-	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(WaitResultsStep				, MacroFunctions::IsNoxPresent					);
-	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickResultsGilStep			, MacroFunctions::IsNoxPresent					);
-	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickResultsExpStep			, MacroFunctions::IsNoxPresent					);
-	MacroNames["ClickResultsItemsStep"			] = std::pair<int, macroFuncType>(ClickResultsItemsStep			, MacroFunctions::IsNoxPresent					);
+	MacroNames["WaitResultsStep"				] = std::pair<int, macroFuncType>(WaitResultsStep				, MacroFunctions::WaitResults					);
+	MacroNames["ClickResultsGilStep"			] = std::pair<int, macroFuncType>(ClickResultsGilStep			, MacroFunctions::ClickResultsGil				);
+	MacroNames["ClickResultsExpStep"			] = std::pair<int, macroFuncType>(ClickResultsExpStep			, MacroFunctions::ClickResultsExp				);
+	MacroNames["ClickResultsItemsStep"			] = std::pair<int, macroFuncType>(ClickResultsItemsStep			, MacroFunctions::ClickResultsItems				);
 	MacroNames["ClickConnectionErrorStep"		] = std::pair<int, macroFuncType>(ClickConnectionErrorStep		, MacroFunctions::ClickConnectionError			);
 	MacroNames["ClickDailyQuestCompletedStep"	] = std::pair<int, macroFuncType>(ClickDailyQuestCompletedStep	, MacroFunctions::ClickDailyQuestCompletedStep	);
 	return 0;

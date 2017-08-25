@@ -13,6 +13,8 @@
 #include "Depart.h"
 #include "Attack.h"
 #include "ResultsGil.h"
+#include "ResultsExp.h"
+#include "ResultsItems.h"
 
 using namespace cv;
 using namespace std;
@@ -45,6 +47,8 @@ int DungeonLocator::DetermineLocation()
 	Depart::DetermineLocation();
 	Attack::DetermineLocation();
 	ResultsGil::DetermineLocation();
+	ResultsExp::DetermineLocation();
+	ResultsItems::DetermineLocation();
 	
 	return 0;
 }

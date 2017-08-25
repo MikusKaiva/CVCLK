@@ -31,6 +31,8 @@ public:
 	static int ClickAttack();
 	static int WaitResults();
 	static int ClickResultsGil();
+	static int ClickResultsExp();
+	static int ClickResultsItems();
 };
 
 

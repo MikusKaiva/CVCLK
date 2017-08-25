@@ -19,3 +19,5 @@
 #define IMG_REPEAT			"images/repeat.png"
 #define IMG_REPEAT_DISABLED	"images/repeat_disabled.png"
 #define IMG_RESULTS_GIL		"images/results_gil.png"
+#define IMG_RESULTS_EXP		"images/results_exp.png"
+#define IMG_RESULTS_ITEMS	"images/results_items.png"

@@ -1,14 +1,14 @@
-#include "ResultsGil.h"
+#include "ResultsItems.h"
 
 #include "FFapp.h"
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
 
-Coords ResultsGil::coordsMsg		= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords ResultsGil::coordsNextBtn	= Coords(0, 0, 500, 500, 0, 0);
+Coords ResultsItems::coordsMsg = Coords(0, 0, 500, 500, 0, 0); //Random numbers
+Coords ResultsItems::coordsNextBtn = Coords(0, 0, 500, 500, 0, 0);
 
-int ResultsGil::DetermineLocation()
+int ResultsItems::DetermineLocation()
 {
 	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
 	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
@@ -31,14 +31,14 @@ int ResultsGil::DetermineLocation()
 	return 0;
 }
 
-bool ResultsGil::IsMsg()
+bool ResultsItems::IsMsg()
 {
 	int x1 = coordsMsg.GetAbsX1();
 	int y1 = coordsMsg.GetAbsY1();
 	int x2 = coordsMsg.GetAbsX2();
 	int y2 = coordsMsg.GetAbsY2();
 
-	if (FindImageInPartOfDesktop(IMG_RESULTS_GIL, x1, y1, x2, y2) == 0)
+	if (FindImageInPartOfDesktop(IMG_RESULTS_ITEMS, x1, y1, x2, y2) == 0)
 	{
 		return true;
 	}
@@ -46,12 +46,12 @@ bool ResultsGil::IsMsg()
 	return false;
 }
 
-int ResultsGil::ClickResultsGil()
+int ResultsItems::ClickResultsItems()
 {
 	return MouseLeftClick(coordsMsg.GetAbsMidX(), coordsMsg.GetAbsMidY());
 }
 
-int ResultsGil::ClickNextBtn()
+int ResultsItems::ClickNextBtn()
 {
 	return MouseLeftClick(coordsNextBtn.GetAbsMidX(), coordsNextBtn.GetAbsMidY());
 }
