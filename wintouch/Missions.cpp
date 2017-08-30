@@ -4,10 +4,11 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords Missions::coordsMsg				= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords Missions::coordsMsgSearchArea	= Coords(0, 0, 500, 500, 0, 0);
-Coords Missions::coordsBtnNext			= Coords(0, 0, 500, 500, 0, 0);
+Coords Missions::coordsMsg				= Coords(0, 0, 500, 500); //Random numbers
+Coords Missions::coordsMsgSearchArea	= Coords(0, 0, 500, 500);
+Coords Missions::coordsBtnNext			= Coords(0, 0, 500, 500);
 
 int Missions::DetermineLocation()
 {
@@ -16,7 +17,6 @@ int Missions::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -26,7 +26,6 @@ int Missions::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgSearchArea.SetX(x1, x2);
 	coordsMsgSearchArea.SetY(y1, y2);
 
@@ -36,7 +35,6 @@ int Missions::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnNext.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnNext.SetX(x1, x2);
 	coordsBtnNext.SetY(y1, y2);
 
@@ -61,4 +59,16 @@ bool Missions::IsMsg()
 int Missions::ClickBtnNext()
 {
 	return MouseLeftClick(coordsBtnNext.GetAbsMidX(), coordsBtnNext.GetAbsMidY());
+}
+
+int Missions::ClickMissions()
+{
+	if (IsMsg())
+	{
+		if (ClickBtnNext() == 0)
+		{
+			return WaitClass::Wait(1000);
+		}
+	}
+	return -1;
 }

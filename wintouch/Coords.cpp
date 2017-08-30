@@ -1,9 +1,12 @@
 #include "Coords.h"
 
-Coords::Coords(int x1, int y1, int x2, int y2, int offsetX, int offsetY)
+int Coords::offsetX = 0;
+int Coords::offsetY = 0;
+
+Coords::Coords(int x1, int y1, int x2, int y2)
 {
-	SetX(x1, x2); SetY(y1, y2);
-	SetOffset(offsetX, offsetY);
+	SetX(x1, x2);
+	SetY(y1, y2);
 }
 int Coords::GetX1() { return x1; }
 int Coords::GetX2() { return x2; }

@@ -6,9 +6,11 @@ public class ResultsExp
 {
 public:
 	static int DetermineLocation();
-	static bool IsMsg();
 	static int ClickResultsExp();
 
 private:
+	static bool IsMsg();
+	static int ClickResultsExpMsg();
+
 	static Coords coords;
 };

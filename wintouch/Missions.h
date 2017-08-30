@@ -6,10 +6,12 @@ public class Missions
 {
 public:
 	static int DetermineLocation();
+	static int ClickMissions();
+
+private:
 	static bool IsMsg();
 	static int ClickBtnNext();
 
-private:
 	static Coords coordsMsg;
 	static Coords coordsMsgSearchArea;
 	static Coords coordsBtnNext;

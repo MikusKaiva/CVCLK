@@ -4,9 +4,10 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords NoCompanion::coordsSearchArea	= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords NoCompanion::coordsBtnNoCompanion = Coords(0, 0, 500, 500, 0, 0);
+Coords NoCompanion::coordsSearchArea	= Coords(0, 0, 500, 500); //Random numbers
+Coords NoCompanion::coordsBtnNoCompanion = Coords(0, 0, 500, 500);
 
 int NoCompanion::DetermineLocation()
 {
@@ -15,7 +16,6 @@ int NoCompanion::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsSearchArea.SetX(x1, x2);
 	coordsSearchArea.SetY(y1, y2);
 
@@ -25,7 +25,6 @@ int NoCompanion::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnNoCompanion.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnNoCompanion.SetX(x1, x2);
 	coordsBtnNoCompanion.SetY(y1, y2);
 
@@ -47,7 +46,7 @@ bool NoCompanion::IsSlider()
 	return false;
 }
 
-int NoCompanion::ClickNoCompanion()
+int NoCompanion::ClickNoCompanionBtn()
 {
 	int ret = -1;
 
@@ -68,5 +67,23 @@ int NoCompanion::ClickNoCompanion()
 		ret = MouseLeftUp();
 	}
 
+	return ret;
+}
+
+int NoCompanion::ClickNoCompanion()
+{
+	int ret = -1;
+	if (IsSlider())
+	{
+		ret = WaitClass::Wait(500);
+		if (ret == 0)
+		{
+			ret = ClickNoCompanionBtn();
+		}
+		if (ret == 0)
+		{
+			return WaitClass::Wait(1000);
+		}
+	}
 	return ret;
 }

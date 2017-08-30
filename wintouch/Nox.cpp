@@ -17,6 +17,7 @@ int Nox::DetermineLocation()
 	const int HEIGHT = 1017;
 	const int SEARCH_AREA_X2 = 1920;
 	const int SEARCH_AREA_Y2 = 70;
+	static bool isStaticLocationsCalculated = false;
 
 	Mat templ, src;
 	int res = -1;
@@ -46,13 +47,17 @@ int Nox::DetermineLocation()
 		coords.SetOffset(x1, y1);
 		coords.SetAbsX(x1, x1 + WIDTH);
 		coords.SetAbsY(y1, y1 + HEIGHT);
-		LOG("Determining the location of FFapp");
-		FFapp::DetermineLocation();
+		if (isStaticLocationsCalculated == false)
+		{
+			LOG("Determining the location of FFapp");
+			FFapp::DetermineLocation();
+			isStaticLocationsCalculated = true;
+		}
 	}
 
 	return res;
 }
 
-Coords Nox::coords = Coords(-1, -1, 360, 640, 0, 0);
+Coords Nox::coords = Coords(-1, -1, 360, 640);
 const int Nox::TOP_BAR_HEIGHT = 35;
 const int Nox::RIGHT_BAR_WIDTH = 38;

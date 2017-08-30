@@ -4,10 +4,11 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords ConnectionError::coordsMsg			= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords ConnectionError::coordsMsgSearchArea	= Coords(0, 0, 500, 500, 0, 0);
-Coords ConnectionError::coordsBtnOk			= Coords(0, 0, 500, 500, 0, 0);
+Coords ConnectionError::coordsMsg			= Coords(0, 0, 500, 500); //Random numbers
+Coords ConnectionError::coordsMsgSearchArea	= Coords(0, 0, 500, 500);
+Coords ConnectionError::coordsBtnOk			= Coords(0, 0, 500, 500);
 
 int ConnectionError::DetermineLocation()
 {
@@ -16,7 +17,6 @@ int ConnectionError::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -26,7 +26,6 @@ int ConnectionError::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgSearchArea.SetX(x1, x2);
 	coordsMsgSearchArea.SetY(y1, y2);
 
@@ -36,11 +35,23 @@ int ConnectionError::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnOk.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnOk.SetX(x1, x2);
 	coordsBtnOk.SetY(y1, y2);
 
 	return 0;
+}
+
+
+int ConnectionError::ClickConnectionError()
+{
+	if (IsMsg())
+	{
+		if (ClickBtnOk() == 0)
+		{
+			return WaitClass::Wait(3000);
+		}
+	}
+	return -1;
 }
 
 bool ConnectionError::IsMsg()

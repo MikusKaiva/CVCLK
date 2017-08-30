@@ -4,10 +4,11 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords DailyQuestCompleted::coordsMsg			= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords DailyQuestCompleted::coordsMsgSearchArea	= Coords(0, 0, 500, 500, 0, 0);
-Coords DailyQuestCompleted::coordsBtnClose			= Coords(0, 0, 500, 500, 0, 0);
+Coords DailyQuestCompleted::coordsMsg			= Coords(0, 0, 500, 500); //Random numbers
+Coords DailyQuestCompleted::coordsMsgSearchArea	= Coords(0, 0, 500, 500);
+Coords DailyQuestCompleted::coordsBtnClose			= Coords(0, 0, 500, 500);
 
 int DailyQuestCompleted::DetermineLocation()
 {
@@ -16,7 +17,6 @@ int DailyQuestCompleted::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -26,7 +26,6 @@ int DailyQuestCompleted::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgSearchArea.SetX(x1, x2);
 	coordsMsgSearchArea.SetY(y1, y2);
 
@@ -36,11 +35,22 @@ int DailyQuestCompleted::DetermineLocation()
 	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnClose.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnClose.SetX(x1, x2);
 	coordsBtnClose.SetY(y1, y2);
 
 	return 0;
+}
+
+int DailyQuestCompleted::ClickDailyQuestCompleted()
+{
+	if (IsMsg())
+	{
+		if (ClickBtnClose() == 0)
+		{
+			return WaitClass::Wait(1000);
+		}
+	}
+	return -1;
 }
 
 bool DailyQuestCompleted::IsMsg()

@@ -5,7 +5,9 @@
 
 #include "MainWindow.h"
 #include "MacroFile.h"
+#include "Nox.h"
 #include "Log.h"
+#include "Wait.h"
 
 void UiInit::Init()
 {
@@ -50,13 +52,31 @@ unsigned __stdcall UiInit::RunMacroThread(void * param)
 	std::string dungName = msclr::interop::marshal_as<std::string>(cliDung);
 
 	LOG("Starting: " + dungName);
-	MacroFunctions::isPaused = false;
-	MacroFunctions::isStopped = false;
-	ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Running);
-
-	MacroFunctions::Run(dungName);
+	if (WaitClass::Start() == 0)
+	{
+		ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Running);
+		MacroFunctions::Run(dungName);
+	}
 
 	ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Stopped);
+
+	return 0;
+};
+
+unsigned __stdcall UiInit::RunDetermineLocationsThread(void * param)
+{
+	while (true)
+	{
+		if (!WaitClass::IsStopped() && !WaitClass::IsPaused())
+		{
+			if (Nox::DetermineLocation() == -1)
+			{
+				WaitClass::Pause();
+				ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Paused);
+			}
+		}
+		Sleep(200);
+	}
 
 	return 0;
 };
@@ -69,13 +89,16 @@ void UiInit::OnRunResumeBtnClick(System::Object ^sender, System::Windows::Routed
 	if (ManagedCode::ManagedGlobals::w->GetState() == TheUI::ObservableControlStates::StateEnum::Stopped)
 	{
 		unsigned tid; // thread ID
-		_beginthreadex(NULL, 0, RunMacroThread, (void *)NULL, 0, &tid);
+		_beginthreadex(NULL, 0, RunMacroThread,				 (void *)NULL, 0, &tid);
+		_beginthreadex(NULL, 0, RunDetermineLocationsThread, (void *)NULL, 0, &tid);
 	}
 	else
 	{
 		LOG("Resuming: " + dungName);
-		MacroFunctions::isPaused = false;
-		ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Running);
+		if (WaitClass::Resume() == 0)
+			ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Running);
+		else
+			ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Paused);
 	}
 }
 
@@ -83,15 +106,15 @@ void UiInit::OnPauseBtnClick(System::Object ^sender, System::Windows::RoutedEven
 {
 	if (ManagedCode::ManagedGlobals::w->GetState() == TheUI::ObservableControlStates::StateEnum::Running)
 	{
-		MacroFunctions::isPaused = true;
+		WaitClass::Pause();
 		ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Paused);
-		LOG("Paused");
+		LOG("Pausing");
 	}
 }
 
 void UiInit::OnStopBtnClick(System::Object ^sender, System::Windows::RoutedEventArgs ^e)
 {
-	MacroFunctions::isStopped = true;
+	WaitClass::Stop();
 	ManagedCode::ManagedGlobals::w->SetState(TheUI::ObservableControlStates::StateEnum::Stopped);
-	LOG("Stopped");
+	LOG("Stopping");
 }

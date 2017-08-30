@@ -119,6 +119,12 @@
     <ClCompile Include="ResultsItems.cpp">
       <Filter>Source Files\ClickObjects</Filter>
     </ClCompile>
+    <ClCompile Include="ToggleMapIcon.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Wait.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -198,6 +204,12 @@
     </ClInclude>
     <ClInclude Include="ResultsItems.h">
       <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ToggleMapIcon.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Wait.h">
+      <Filter>Header Files\gme</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-#include "ResultsExp.h"
+#include "ToggleMapIcon.h"
 
 #include "FFapp.h"
 #include "constants.h"
@@ -6,9 +6,9 @@
 #include "MouseControl.h"
 #include "Wait.h"
 
-Coords ResultsExp::coords = Coords(0, 0, 500, 500); //Random numbers
+Coords ToggleMapIcon::coords = Coords(0, 0, 500, 500); //Random numbers
 
-int ResultsExp::DetermineLocation()
+int ToggleMapIcon::DetermineLocation()
 {
 	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
 	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
@@ -21,14 +21,14 @@ int ResultsExp::DetermineLocation()
 	return 0;
 }
 
-bool ResultsExp::IsMsg()
+bool ToggleMapIcon::IsMsg()
 {
 	int x1 = coords.GetAbsX1();
 	int y1 = coords.GetAbsY1();
 	int x2 = coords.GetAbsX2();
 	int y2 = coords.GetAbsY2();
 
-	if (FindImageInPartOfDesktop(IMG_RESULTS_EXP, x1, y1, x2, y2) == 0)
+	if (FindImageInPartOfDesktop(IMG_MAP_ICON, x1, y1, x2, y2) == 0)
 	{
 		return true;
 	}
@@ -36,20 +36,23 @@ bool ResultsExp::IsMsg()
 	return false;
 }
 
-int ResultsExp::ClickResultsExpMsg()
+int ToggleMapIcon::ClickMapIcon()
 {
 	return MouseLeftClick(coords.GetAbsMidX(), coords.GetAbsMidY());
 }
 
-int ResultsExp::ClickResultsExp()
+int ToggleMapIcon::WaitToggleMapIcon()
 {
-	int ret = -1;
-	if (IsMsg())
-	{
-		if (ClickResultsExpMsg() == 0)
-		{
-			return WaitClass::Wait(1000);
-		}
-	}
-	return -1;
+	return WaitClass::WaitClickableObject(IsMsg);
 }
+
+/*  
+S . . # #
+# . . . C
+# . # # .
+. . # # .
+# . # . .
+# . # # #
+# . # # G
+# . . . .
+*/

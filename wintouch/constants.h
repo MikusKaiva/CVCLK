@@ -21,3 +21,4 @@
 #define IMG_RESULTS_GIL		"images/results_gil.png"
 #define IMG_RESULTS_EXP		"images/results_exp.png"
 #define IMG_RESULTS_ITEMS	"images/results_items.png"
+#define IMG_MAP_ICON		"images/map_icon.png"

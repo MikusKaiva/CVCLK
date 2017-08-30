@@ -15,6 +15,8 @@
 #include "ResultsGil.h"
 #include "ResultsExp.h"
 #include "ResultsItems.h"
+#include "ToggleMapIcon.h"
+#include "Wait.h"
 
 using namespace cv;
 using namespace std;
@@ -30,27 +32,31 @@ int DungeonLocator::DetermineLocation()
 	int x2 = x1 + FFapp::coords.GetWidth()  * 0.73 ;
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315 ;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
-	int offsetX = FFapp::coords.GetOffsetX();
-	int offsetY = FFapp::coords.GetOffsetY();
-	coords.push_back(Coords(x1, y1, x2, y2, offsetX, offsetY));
+	coords.push_back(Coords(x1, y1, x2, y2));
 
 	int spaceBetween = FFapp::coords.GetHeight() * 0.148;
 	for (int i = 0; i < 4; ++i)
 	{
 		y1 += spaceBetween;
 		y2 += spaceBetween;
-		coords.push_back(Coords(x1, y1, x2, y2, offsetX, offsetY));
+		coords.push_back(Coords(x1, y1, x2, y2));
 	}
-	Energy::DetermineLocation();
-	Missions::DetermineLocation();
-	NoCompanion::DetermineLocation();
-	Depart::DetermineLocation();
-	Attack::DetermineLocation();
-	ResultsGil::DetermineLocation();
-	ResultsExp::DetermineLocation();
-	ResultsItems::DetermineLocation();
+	Energy			::DetermineLocation();
+	Missions		::DetermineLocation();
+	NoCompanion		::DetermineLocation();
+	Depart			::DetermineLocation();
+	Attack			::DetermineLocation();
+	ResultsGil		::DetermineLocation();
+	ResultsExp		::DetermineLocation();
+	ResultsItems	::DetermineLocation();
+	ToggleMapIcon	::DetermineLocation();
 	
 	return 0;
+}
+
+int DungeonLocator::ClickEarthShrine_Exit()
+{
+	return ClickDung(E_SHRINE_EXIT);
 }
 
 bool DungeonLocator::IsDung(std::string dungName)
@@ -94,4 +100,40 @@ int DungeonLocator::ClickLastDung()
 		return -1;
 	}
 	return MouseLeftClick(coords[coordIndex].GetAbsMidX(), coords[coordIndex].GetAbsMidY());
+}
+
+int DungeonLocator::ClickDung(std::string dungName)
+{
+	bool notEnoughEne = false;
+	int ret = -1;
+
+	if (IsDung(dungName))
+	{
+		if (ClickLastDung() == 0)
+		{
+			ret = WaitClass::Wait(1000);
+			if (ret == 0 && Energy::IsMsgNoEne())
+			{
+				notEnoughEne = true;
+			}
+
+		}
+	}
+
+	if (notEnoughEne)
+	{
+		ret = WaitClass::Wait(300 * 1000);
+		if (ret == 0)
+		{
+			ret = Energy::ClickBtnBack();
+		}
+		if (ret == 0)
+		{
+			ret = WaitClass::Wait(1000);
+			if (ret == 0)
+				ret = ClickDung(dungName);
+		}
+	}
+
+	return ret;
 }
