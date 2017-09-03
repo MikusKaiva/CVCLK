@@ -13,8 +13,11 @@ int MacroFunctions::Run(std::string dungName)
 {
 	int ret = -1;
 
+	//ConnectionError::IsMsg();
+	//return -1;
+
 	int dungIndex = MacroFile::FindDung(dungName);
-	int maxFailures = 100;
+	int maxFailures = 1000;
 	int failures = 0;
 	if (dungIndex < 0)
 	{
@@ -81,6 +84,7 @@ int MacroFunctions::RunSequential(std::vector<MacroStep>& sequentialSteps, int s
 	if (ret == 0)
 	{
 		std::vector<MacroStep>::iterator sequentalStep = sequentialSteps.begin();
+		sequentalStep += stepIndex;
 		ret = MacroFuncCaller(sequentalStep->function);
 		while (ret == 0)
 		{

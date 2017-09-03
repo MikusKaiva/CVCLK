@@ -10,10 +10,10 @@ Coords ResultsExp::coords = Coords(0, 0, 500, 500); //Random numbers
 
 int ResultsExp::DetermineLocation()
 {
-	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
-	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	int y2 = y1 + FFapp::coords.GetHeight() / 20;
+	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() * 7 / 25;
+	int x2 = x1 + FFapp::coords.GetWidth() * 11 / 50;
+	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 23 / 200;
+	int y2 = y1 + FFapp::coords.GetHeight() * 3 / 100;
 
 	coords.SetX(x1, x2);
 	coords.SetY(y1, y2);

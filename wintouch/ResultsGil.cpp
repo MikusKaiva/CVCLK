@@ -11,17 +11,17 @@ Coords ResultsGil::coordsNextBtn	= Coords(0, 0, 500, 500);
 
 int ResultsGil::DetermineLocation()
 {
-	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
-	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
+	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 4;
+	int x2 = x1 + +FFapp::coords.GetWidth() / 4;
+	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 19 / 50;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
-	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
+	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() * 2 / 5;
 	x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
+	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 17 / 20;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
 	coordsNextBtn.SetX(x1, x2);

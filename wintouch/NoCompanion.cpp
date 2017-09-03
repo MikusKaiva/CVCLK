@@ -11,19 +11,19 @@ Coords NoCompanion::coordsBtnNoCompanion = Coords(0, 0, 500, 500);
 
 int NoCompanion::DetermineLocation()
 {
-	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
-	int x2 = x1 + FFapp::coords.GetWidth() / 20;
-	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
+	int x1 = FFapp::coords.GetX2() - FFapp::coords.GetWidth() / 30;
+	int x2 = FFapp::coords.GetX2();
+	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 61 / 200;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
 	coordsSearchArea.SetX(x1, x2);
 	coordsSearchArea.SetY(y1, y2);
 
 
-	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
+	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 35;
 	x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	y2 = y1 + FFapp::coords.GetHeight() / 20;
+	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 87 / 100;
+	y2 = y1 + FFapp::coords.GetHeight() / 8;
 
 	coordsBtnNoCompanion.SetX(x1, x2);
 	coordsBtnNoCompanion.SetY(y1, y2);
@@ -50,6 +50,11 @@ int NoCompanion::ClickNoCompanionBtn()
 {
 	int ret = -1;
 
+	int prevX, prevY;
+	bool prevPositionsaved = false;
+	if (GetMousePosition(prevX, prevY) == 0)
+		prevPositionsaved = true;
+
 	ret = SetMousePosition(coordsSearchArea.GetAbsMidX(), coordsSearchArea.GetAbsMidY());
 
 	if (ret == 0)
@@ -66,6 +71,13 @@ int NoCompanion::ClickNoCompanionBtn()
 	{
 		ret = MouseLeftUp();
 	}
+
+	if (ret == 0)
+	{
+		MouseLeftClick(coordsBtnNoCompanion.GetAbsMidX(), coordsBtnNoCompanion.GetAbsMidY());
+	}
+	if (prevPositionsaved)
+		SetMousePosition(prevX, prevY);
 
 	return ret;
 }

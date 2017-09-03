@@ -12,7 +12,6 @@ private:
 	static bool IsMsg();
 	static int ClickBtnNext();
 
-	static Coords coordsMsg;
-	static Coords coordsMsgSearchArea;
+	static Coords coordsSearchArea;
 	static Coords coordsBtnNext;
 };
