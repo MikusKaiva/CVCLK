@@ -33,6 +33,12 @@
     <Filter Include="Source Files\macros">
       <UniqueIdentifier>{caf79b92-d876-47ec-bc16-f962bae6cc04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ClickObjects">
+      <UniqueIdentifier>{140efc61-c3ec-488c-976f-92b3a279b9f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ClickObjects">
+      <UniqueIdentifier>{6026379d-ac2a-4f1b-98fe-8690197bf368}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_ui_init.cpp">
@@ -80,6 +86,39 @@
     <ClCompile Include="UiInit.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
+    <ClCompile Include="DungeonLocator.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="Energy.cpp">
+      <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionError.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DailyQuestCompleted.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Missions.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="NoCompanion.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Depart.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsGil.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsExp.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsItems.cpp">
+      <Filter>Source Files\ClickObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_ui_init.h">
@@ -126,6 +165,39 @@
     </ClInclude>
     <ClInclude Include="UiInit.h">
       <Filter>Header Files\general</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonLocator.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="Energy.h">
+      <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionError.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DailyQuestCompleted.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Missions.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="NoCompanion.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Depart.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsGil.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsExp.h">
+      <Filter>Header Files\ClickObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsItems.h">
+      <Filter>Header Files\ClickObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

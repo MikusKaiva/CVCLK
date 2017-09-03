@@ -57,4 +57,14 @@ int Coords::SetOffset(int offsetX, int offsetY)
 int Coords::GetMidX() { return (x1 + x2) / 2; }
 int Coords::GetMidY() { return (y1 + y2) / 2; }
 int Coords::GetAbsMidX() { return GetMidX() + GetOffsetX(); }
-int Coords::GetAbsMidY() { return GetMidY() + +GetOffsetY(); }
+int Coords::GetAbsMidY() { return GetMidY() + GetOffsetY(); }
+
+int Coords::GetWidth()
+{
+	return x2 - x1;
+}
+
+int Coords::GetHeight()
+{
+	return y2 - y1;
+}

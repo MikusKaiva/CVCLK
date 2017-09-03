@@ -77,19 +77,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="ConnectionError.cpp" />
     <ClCompile Include="Coords.cpp" />
+    <ClCompile Include="DailyQuestCompleted.cpp" />
+    <ClCompile Include="Depart.cpp" />
     <ClCompile Include="DesktopCapture.cpp" />
+    <ClCompile Include="DungeonLocator.cpp" />
+    <ClCompile Include="Energy.cpp" />
     <ClCompile Include="FFapp.cpp" />
     <ClCompile Include="FindImage.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MacroFile.cpp" />
     <ClCompile Include="MacroFunctions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="Missions.cpp" />
     <ClCompile Include="MouseControl.cpp" />
+    <ClCompile Include="NoCompanion.cpp" />
     <ClCompile Include="Nox.cpp" />
+    <ClCompile Include="ResultsExp.cpp" />
+    <ClCompile Include="ResultsGil.cpp" />
+    <ClCompile Include="ResultsItems.cpp" />
     <ClCompile Include="test_cli_wrap.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
@@ -98,17 +109,28 @@
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attack.h" />
+    <ClInclude Include="ConnectionError.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="Coords.h" />
+    <ClInclude Include="DailyQuestCompleted.h" />
+    <ClInclude Include="Depart.h" />
     <ClInclude Include="DesktopCapture.h" />
+    <ClInclude Include="DungeonLocator.h" />
+    <ClInclude Include="Energy.h" />
     <ClInclude Include="FFapp.h" />
     <ClInclude Include="FindImage.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MacroFile.h" />
     <ClInclude Include="MacroFunctions.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Missions.h" />
     <ClInclude Include="MouseControl.h" />
+    <ClInclude Include="NoCompanion.h" />
     <ClInclude Include="Nox.h" />
+    <ClInclude Include="ResultsExp.h" />
+    <ClInclude Include="ResultsGil.h" />
+    <ClInclude Include="ResultsItems.h" />
     <ClInclude Include="test_cli_wrap.h" />
     <ClInclude Include="test_ui_init.h" />
     <ClInclude Include="UiInit.h" />

@@ -10,13 +10,12 @@ enum ActionStepType
 {
 	ClickConnectionErrorStep
 	, ClickDailyQuestCompletedStep
-	, ClickDungeon
-	, ClickNextStep
+	, ClickEarthShrine_Exit
+	, ClickMissionsStep
 	, ClickNoCompanionStep
 	, ClickDepartStep
 	, WaitAttackStep
 	, ClickAttackStep
-	, ClickRepeatStep
 	, WaitResultsStep
 	, ClickResultsGilStep
 	, ClickResultsExpStep
@@ -39,16 +38,9 @@ struct MacroSteps
 	std::vector<MacroStep> commonSteps;
 };
 
-static class MacroFile
+class MacroFile
 {
 public:
-	MacroFile()
-	{
-	}
-
-	~MacroFile()
-	{
-	}
 	static int LoadMacroFile();
 	static std::vector<MacroSteps> macroStepDB;
 	static int FindDung(std::string dungName);

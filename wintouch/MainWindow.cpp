@@ -40,8 +40,7 @@ namespace ManagedCode
 
 	int RunTests()
 	{
-		Nox nox = Nox();
-		nox.DetermineLocation();
+		Nox::DetermineLocation();
 		//TestUiInit();
 		//TestCliWrap();
 		return 0;

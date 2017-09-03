@@ -6,31 +6,28 @@
 Earth Shrine - Exit
 
 [SEQUENTIAL_STEPS]
-1_ClickDungeon
-1_ClickNextStep
+1_ClickEarthShrine_Exit
+1_ClickMissionsStep
 1_ClickNoCompanionStep
 1_ClickDepartStep
 1_WaitAttackStep
 1_ClickAttackStep
-1_ClickRepeatStep
 1_WaitResultsStep
 1_ClickResultsGilStep
 1_ClickResultsExpStep
 1_ClickResultsItemsStep
 
 [UNIQUE_STEPS]
-1_ClickDungeon
-2_ClickNextStep
-1_ClickNextStep
-2_
-1_ClickRepeatStep
+1_ClickEarthShrine_Exit
+2_ClickMissionsStep
+1_ClickMissionsStep
 2_
 1_ClickNoCompanionStep
 2_ClickDepartStep
 1_ClickDepartStep
 2_WaitAttackStep
 1_ClickAttackStep
-2_ClickRepeatStep
+2_WaitResultsStep
 1_ClickResultsGilStep
 2_ClickResultsExpStep
 1_ClickResultsExpStep
