@@ -12,5 +12,4 @@ public:
 private:
 	static Coords coordsMsg;
 	static Coords coordsMsgSearchArea;
-	static Coords coordsBtnDepart;
 };

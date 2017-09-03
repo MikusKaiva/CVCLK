@@ -40,6 +40,10 @@ int FindImageInPartOfDesktop(const std::string imgFileName, int x1, int y1, int 
 
 	res = GetPartOfDesktop(src, x1, y1, x2, y2);
 
+	//namedWindow(imgFileName, WINDOW_AUTOSIZE);
+	//imshow(imgFileName, src);
+	//waitKey();
+
 	if (res != 0)
 		LOG("Failed to get Part Of Desktop");
 
@@ -56,7 +60,7 @@ int FindImageInPartOfDesktop(const std::string imgFileName, int x1, int y1, int 
 	if (res == 0)
 	{
 		res = FindImage(templ, src, x1, y1, x2, y2);
-		if (res != 0) LOG("Image '" + imgFileName + "' not found in area");
+		//if (res != 0) LOG("Image '" + imgFileName + "' not found in area");
 	}
 
 	return res;

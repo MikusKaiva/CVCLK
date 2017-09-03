@@ -10,7 +10,6 @@ public:
 	static int ClickBtnNext();
 
 private:
-	static Coords coordsMsg;
-	static Coords coordsMsgSearchArea;
+	static Coords coordsSearchArea;
 	static Coords coordsBtnNext;
 };

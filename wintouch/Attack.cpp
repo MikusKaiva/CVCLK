@@ -14,19 +14,19 @@ std::vector<Coords> Attack::coordsChars	= std::vector<Coords>();
 
 int Attack::DetermineLocation()
 {
-	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
-	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	int y2 = y1 + FFapp::coords.GetHeight() / 20;
+	int x1 = FFapp::coords.GetX1();
+	int x2 = FFapp::coords.GetX2();
+	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 3 / 5;
+	int y2 = y1 + FFapp::coords.GetHeight() * 2 / 5;
 
 	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
 
-	x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() / 20;
-	x2 = x1 + FFapp::coords.GetWidth()  * 0.73;
-	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
+	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 4;
+	x2 = x1 + FFapp::coords.GetWidth() / 4;
+	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 47 / 50;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
 	coordsMsgSearchArea.SetOffset(coordsMsg.GetOffsetX(), coordsMsg.GetOffsetY());
@@ -34,10 +34,10 @@ int Attack::DetermineLocation()
 	coordsMsgSearchArea.SetY(y1, y2);
 
 
-	x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() / 20;
-	x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	y2 = y1 + FFapp::coords.GetHeight() / 20;
+	x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() * 27 / 100;
+	x2 = x1 + FFapp::coords.GetWidth() * 21 / 100;
+	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 47 / 50;
+	y2 = y1 + FFapp::coords.GetHeight() / 21;
 
 	coordsBtnRepeat.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnRepeat.SetX(x1, x2);
@@ -48,10 +48,10 @@ int Attack::DetermineLocation()
 	{
 		if ( i % 2 == 0)
 		{
-			x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() / 20;
+			x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 100;
 			x2 = FFapp::coords.GetX1() * 3 / 2 - x1 + FFapp::coords.GetX2() / 2;
-			y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
-			y2 = y1 + FFapp::coords.GetHeight() / 20;
+			y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 31 / 50 + FFapp::coords.GetHeight() * i / 20;
+			y2 = y1 + FFapp::coords.GetHeight() / 10;
 		}
 		else
 		{

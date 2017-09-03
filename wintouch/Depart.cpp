@@ -7,38 +7,27 @@
 
 Coords Depart::coordsMsg			= Coords(0, 0, 500, 500, 0, 0); //Random numbers
 Coords Depart::coordsMsgSearchArea	= Coords(0, 0, 500, 500, 0, 0);
-Coords Depart::coordsBtnDepart		= Coords(0, 0, 500, 500, 0, 0);
 
 int Depart::DetermineLocation()
 {
-	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() / 20;
+	int x1 = FFapp::coords.GetX1() + FFapp::coords.GetWidth() * 3 / 10;
 	int x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	int y2 = y1 + FFapp::coords.GetHeight() / 20;
+	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 169 / 200;
+	int y2 = y1 + FFapp::coords.GetHeight() / 15;
 
 	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
 
-	x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() / 20;
-	x2 = x1 + FFapp::coords.GetWidth()  * 0.73;
-	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	y2 = y1 + FFapp::coords.GetHeight() / 20;
+	x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() * 0.08;
+	x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
+	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.015;
+	y2 = y1 + FFapp::coords.GetHeight() / 23;
 
 	coordsMsgSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgSearchArea.SetX(x1, x2);
 	coordsMsgSearchArea.SetY(y1, y2);
-
-
-	x1 = coordsMsg.GetX1() + FFapp::coords.GetWidth() / 20;
-	x2 = FFapp::coords.GetX1() - x1 + FFapp::coords.GetX2();
-	y1 = coordsMsg.GetY1() + FFapp::coords.GetHeight() * 0.315;
-	y2 = y1 + FFapp::coords.GetHeight() / 20;
-
-	coordsBtnDepart.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
-	coordsBtnDepart.SetX(x1, x2);
-	coordsBtnDepart.SetY(y1, y2);
 
 	return 0;
 }
@@ -60,5 +49,5 @@ bool Depart::IsMsg()
 
 int Depart::ClickBtnDepart()
 {
-	return MouseLeftClick(coordsBtnDepart.GetAbsMidX(), coordsBtnDepart.GetAbsMidY());
+	return MouseLeftClick(coordsMsg.GetAbsMidX(), coordsMsg.GetAbsMidY());
 }
