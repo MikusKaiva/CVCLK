@@ -4,9 +4,10 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords ResultsGil::coordsMsg		= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords ResultsGil::coordsNextBtn	= Coords(0, 0, 500, 500, 0, 0);
+Coords ResultsGil::coordsMsg		= Coords(0, 0, 500, 500); //Random numbers
+Coords ResultsGil::coordsNextBtn	= Coords(0, 0, 500, 500);
 
 int ResultsGil::DetermineLocation()
 {
@@ -15,7 +16,6 @@ int ResultsGil::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 19 / 50;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -24,7 +24,6 @@ int ResultsGil::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 17 / 20;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsNextBtn.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsNextBtn.SetX(x1, x2);
 	coordsNextBtn.SetY(y1, y2);
 
@@ -46,7 +45,7 @@ bool ResultsGil::IsMsg()
 	return false;
 }
 
-int ResultsGil::ClickResultsGil()
+int ResultsGil::ClickResultsGilMsg()
 {
 	return MouseLeftClick(coordsMsg.GetAbsMidX(), coordsMsg.GetAbsMidY());
 }
@@ -54,4 +53,34 @@ int ResultsGil::ClickResultsGil()
 int ResultsGil::ClickNextBtn()
 {
 	return MouseLeftClick(coordsNextBtn.GetAbsMidX(), coordsNextBtn.GetAbsMidY());
+}
+
+int ResultsGil::WaitResults()
+{
+	return WaitClass::WaitClickableObject(IsMsg);
+}
+
+int ResultsGil::ClickResultsGil()
+{
+	int ret = -1;
+	if (IsMsg())
+	{
+		int i = 0;
+		do
+		{
+			ret = ClickResultsGilMsg();
+			if (ret == 0) ret = WaitClass::Wait(500);
+		} while (ret == 0 && ++i <= 3);
+
+		if (ret == 0)
+		{
+			ClickNextBtn();
+		}
+
+		if (ret == 0)
+		{
+			ret = WaitClass::Wait(1000);
+		}
+	}
+	return ret;
 }

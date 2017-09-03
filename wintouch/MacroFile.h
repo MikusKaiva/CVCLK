@@ -48,9 +48,9 @@ public:
 	static const std::string ALL_DUNG_NAME;
 
 private:
-	static void ReadCommonSteps(std::ifstream &f, std::string &line, int &retflag);
-	static void ReadUniqueSteps(std::ifstream &f, std::string &line, int &retflag);
-	static void ReadSequentialSteps(std::ifstream &f, std::string &line, int &retflag);
+	static void ReadCommonSteps(std::ifstream &f, int &retflag);
+	static void ReadUniqueSteps(std::ifstream &f, int &retflag);
+	static void ReadSequentialSteps(std::ifstream &f, int &retflag);
 	static void ReadDungName(std::ifstream &f, std::string &line, int &retflag);
 	static int InsertMacroStep(std::vector<MacroStep>& mSteps, std::string line);
 	static int InitMacroNames();
@@ -58,6 +58,7 @@ private:
 	static int GetMacroStepId(std::string stepName);
 	static macroFuncType GetMacroStepFunction(std::string stepName);
 	static std::map<std::string, std::pair<int, macroFuncType> > MacroNames;
+	static std::map<std::string, std::vector<std::pair<std::string, std::string> > > stepCombos;
 	static int lineNo;
 };
 

@@ -5,13 +5,13 @@
 #include "FindImage.h"
 #include "MouseControl.h"
 
-Coords Energy::coordsMsgNoEne				= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords Energy::coordsMsgNoEneSearchArea		= Coords(0, 0, 500, 500, 0, 0);
-Coords Energy::coordsBtnBack				= Coords(0, 0, 500, 500, 0, 0);
-Coords Energy::coordsBtnUseLapis			= Coords(0, 0, 500, 500, 0, 0);
-Coords Energy::coordsMsgUseLapis			= Coords(0, 0, 500, 500, 0, 0);
-Coords Energy::coordsMsgUseLapisSearchArea	= Coords(0, 0, 500, 500, 0, 0);
-Coords Energy::coordsBtnYes					= Coords(0, 0, 500, 500, 0, 0);
+Coords Energy::coordsMsgNoEne				= Coords(0, 0, 500, 500); //Random numbers
+Coords Energy::coordsMsgNoEneSearchArea		= Coords(0, 0, 500, 500);
+Coords Energy::coordsBtnBack				= Coords(0, 0, 500, 500);
+Coords Energy::coordsBtnUseLapis			= Coords(0, 0, 500, 500);
+Coords Energy::coordsMsgUseLapis			= Coords(0, 0, 500, 500);
+Coords Energy::coordsMsgUseLapisSearchArea	= Coords(0, 0, 500, 500);
+Coords Energy::coordsBtnYes					= Coords(0, 0, 500, 500);
 
 int Energy::DetermineLocation()
 {
@@ -25,7 +25,6 @@ int Energy::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	int y2 = y1 + FFapp::coords.GetHeight() / 20;
 	
-	coordsMsgNoEne.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgNoEne.SetX(x1, x2);
 	coordsMsgNoEne.SetY(y1, y2);
 
@@ -36,7 +35,6 @@ int Energy::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgNoEneSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgNoEneSearchArea.SetX(x1, x2);
 	coordsMsgNoEneSearchArea.SetY(y1, y2);
 
@@ -47,7 +45,6 @@ int Energy::DetermineLocation()
 	y1 = coordsMsgNoEne.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnBack.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnBack.SetX(x1, x2);
 	coordsBtnBack.SetY(y1, y2);
 
@@ -58,7 +55,6 @@ int Energy::DetermineLocation()
 	y1 = coordsMsgNoEne.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnUseLapis.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnUseLapis.SetX(x1, x2);
 	coordsBtnUseLapis.SetY(y1, y2);
 
@@ -69,7 +65,6 @@ int Energy::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgUseLapis.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgUseLapis.SetX(x1, x2);
 	coordsMsgUseLapis.SetY(y1, y2);
 
@@ -80,7 +75,6 @@ int Energy::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgUseLapisSearchArea.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsgUseLapisSearchArea.SetX(x1, x2);
 	coordsMsgUseLapisSearchArea.SetY(y1, y2);
 
@@ -91,7 +85,6 @@ int Energy::DetermineLocation()
 	y1 = coordsMsgNoEne.GetY1() + FFapp::coords.GetHeight() * 0.315;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsBtnYes.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnYes.SetX(x1, x2);
 	coordsBtnYes.SetY(y1, y2);
 

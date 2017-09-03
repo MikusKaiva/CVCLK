@@ -4,8 +4,9 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords ResultsExp::coords = Coords(0, 0, 500, 500, 0, 0); //Random numbers
+Coords ResultsExp::coords = Coords(0, 0, 500, 500); //Random numbers
 
 int ResultsExp::DetermineLocation()
 {
@@ -14,7 +15,6 @@ int ResultsExp::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 23 / 200;
 	int y2 = y1 + FFapp::coords.GetHeight() * 3 / 100;
 
-	coords.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coords.SetX(x1, x2);
 	coords.SetY(y1, y2);
 
@@ -36,7 +36,20 @@ bool ResultsExp::IsMsg()
 	return false;
 }
 
-int ResultsExp::ClickResultsExp()
+int ResultsExp::ClickResultsExpMsg()
 {
 	return MouseLeftClick(coords.GetAbsMidX(), coords.GetAbsMidY());
+}
+
+int ResultsExp::ClickResultsExp()
+{
+	int ret = -1;
+	if (IsMsg())
+	{
+		if (ClickResultsExpMsg() == 0)
+		{
+			return WaitClass::Wait(1000);
+		}
+	}
+	return -1;
 }

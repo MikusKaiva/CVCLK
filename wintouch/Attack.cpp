@@ -6,10 +6,11 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords Attack::coordsMsg				= Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords Attack::coordsMsgSearchArea		= Coords(0, 0, 500, 500, 0, 0);
-Coords Attack::coordsBtnRepeat			= Coords(0, 0, 500, 500, 0, 0);
+Coords Attack::coordsMsg				= Coords(0, 0, 500, 500); //Random numbers
+Coords Attack::coordsMsgSearchArea		= Coords(0, 0, 500, 500);
+Coords Attack::coordsBtnRepeat			= Coords(0, 0, 500, 500);
 std::vector<Coords> Attack::coordsChars	= std::vector<Coords>();
 
 int Attack::DetermineLocation()
@@ -19,7 +20,6 @@ int Attack::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 3 / 5;
 	int y2 = y1 + FFapp::coords.GetHeight() * 2 / 5;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -29,7 +29,6 @@ int Attack::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 47 / 50;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsMsgSearchArea.SetOffset(coordsMsg.GetOffsetX(), coordsMsg.GetOffsetY());
 	coordsMsgSearchArea.SetX(x1, x2);
 	coordsMsgSearchArea.SetY(y1, y2);
 
@@ -39,7 +38,6 @@ int Attack::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 47 / 50;
 	y2 = y1 + FFapp::coords.GetHeight() / 21;
 
-	coordsBtnRepeat.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsBtnRepeat.SetX(x1, x2);
 	coordsBtnRepeat.SetY(y1, y2);
 
@@ -60,7 +58,7 @@ int Attack::DetermineLocation()
 			y1 = coordsChars[i - 1].GetY1();
 			y2 = coordsChars[i - 1].GetY2();
 		}
-		coordsChars.push_back(Coords(x1, y1, x2, y2, coordsMsg.GetOffsetX(), coordsMsg.GetOffsetY()));
+		coordsChars.push_back(Coords(x1, y1, x2, y2));
 	}
 	
 
@@ -121,4 +119,41 @@ int Attack::ClickChars(const int timeBetweenClicksMiliSeconds)
 	};
 
 	return res;
+}
+
+int Attack::WaitAttack()
+{
+	return WaitClass::WaitClickableObject(IsMsg);
+}
+
+int Attack::ClickAttack()
+{
+	int ret = -1;
+	bool clickChars = true;
+
+	do
+	{
+		if (IsRepeatDisabled())
+		{
+			ret = WaitClass::Wait(200);
+		}
+		else if (IsRepeat())
+		{
+			ret = ClickBtnRepeat();
+			if (clickChars && ret == 0)
+			{
+				Sleep(200);
+				ret = ClickChars();
+				clickChars = false;
+			}
+			if (ret == 0)
+				ret = WaitClass::Wait(1000);
+		}
+		else
+		{
+			break;
+		}
+	} while (ret == 0);
+
+	return ret;
 }

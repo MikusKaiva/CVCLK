@@ -4,9 +4,10 @@
 #include "constants.h"
 #include "FindImage.h"
 #include "MouseControl.h"
+#include "Wait.h"
 
-Coords ResultsItems::coordsMsg = Coords(0, 0, 500, 500, 0, 0); //Random numbers
-Coords ResultsItems::coordsNextBtn = Coords(0, 0, 500, 500, 0, 0);
+Coords ResultsItems::coordsMsg = Coords(0, 0, 500, 500); //Random numbers
+Coords ResultsItems::coordsNextBtn = Coords(0, 0, 500, 500);
 
 int ResultsItems::DetermineLocation()
 {
@@ -15,7 +16,6 @@ int ResultsItems::DetermineLocation()
 	int y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 23 / 200;
 	int y2 = y1 + FFapp::coords.GetHeight() * 3 / 100;
 
-	coordsMsg.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsMsg.SetX(x1, x2);
 	coordsMsg.SetY(y1, y2);
 
@@ -24,7 +24,6 @@ int ResultsItems::DetermineLocation()
 	y1 = FFapp::coords.GetY1() + FFapp::coords.GetHeight() * 17 / 20;
 	y2 = y1 + FFapp::coords.GetHeight() / 20;
 
-	coordsNextBtn.SetOffset(FFapp::coords.GetOffsetX(), FFapp::coords.GetOffsetY());
 	coordsNextBtn.SetX(x1, x2);
 	coordsNextBtn.SetY(y1, y2);
 
@@ -46,7 +45,7 @@ bool ResultsItems::IsMsg()
 	return false;
 }
 
-int ResultsItems::ClickResultsItems()
+int ResultsItems::ClickResultsItemsMsg()
 {
 	return MouseLeftClick(coordsMsg.GetAbsMidX(), coordsMsg.GetAbsMidY());
 }
@@ -54,4 +53,29 @@ int ResultsItems::ClickResultsItems()
 int ResultsItems::ClickNextBtn()
 {
 	return MouseLeftClick(coordsNextBtn.GetAbsMidX(), coordsNextBtn.GetAbsMidY());
+}
+
+int ResultsItems::ClickResultsItems()
+{
+	int ret = -1;
+	if (IsMsg())
+	{
+		ret = ClickResultsItemsMsg();
+
+		if (ret == 0)
+		{
+			ret = WaitClass::Wait(2000);
+		}
+
+		if (ret == 0)
+		{
+			ClickNextBtn();
+		}
+
+		if (ret == 0)
+		{
+			ret = WaitClass::Wait(3000);
+		}
+	}
+	return ret;
 }
