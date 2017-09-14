@@ -2,7 +2,6 @@
 
 #include <Windows.h>
 
-#include "ConnectionError.h"
 #include "Log.h"
 #include "Nox.h"
 
@@ -27,39 +26,6 @@ int WaitClass::Wait(int miliSeconds)
 		miliSeconds -=step;
 	} while (miliSeconds > 0);
 	return 0;
-}
-
-int WaitClass::WaitClickableObject(bool(*object)())
-{
-	int ret = -1;
-	int howLong = 15;
-
-	while (howLong >= 0)
-	{
-		if (object)
-		{
-			ret = 0;
-			break;
-		}
-		ret = ConnectionError::ClickConnectionError();
-		if (ret == 0)
-		{
-			howLong = 10;
-			continue;
-		}
-		if (ret == STOP_THREAD)
-		{
-			break;
-		}
-		howLong--;
-		ret = WaitClass::Wait(1000);
-		if (ret != 0)
-		{
-			break;
-		}
-		ret = -1;
-	}
-	return ret;
 }
 
 int WaitClass::Start()
@@ -102,3 +68,4 @@ bool WaitClass::IsStopped()
 {
 	return isStopped;
 }
+

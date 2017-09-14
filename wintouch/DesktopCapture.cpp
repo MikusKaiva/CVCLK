@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 #include "DesktopCapture.h"
 
 using namespace cv;
@@ -44,6 +45,18 @@ int GetPartOfDesktop(cv::Mat& src, int x1, int y1, int x2, int y2)
 	DeleteObject(hBitmap);
 	DeleteDC(hdcSource);
     DeleteDC(hdcMemory);
+
+	return 0;
+}
+
+int ShowPartOfDesktop(std::string name, int x1, int y1, int x2, int y2)
+{
+	cv::Mat src;
+	GetPartOfDesktop(src, x1, y1, x2, y2);
+
+	namedWindow(name, WINDOW_AUTOSIZE);
+	imshow(name, src);
+	waitKey();
 
 	return 0;
 }

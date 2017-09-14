@@ -2,6 +2,14 @@
 
 int Coords::offsetX = 0;
 int Coords::offsetY = 0;
+int Coords::horizUnits = 0;
+int Coords::vertUnits = 0;
+
+Coords::Coords()
+{
+	SetX(0, 0);
+	SetY(0, 0);
+}
 
 Coords::Coords(int x1, int y1, int x2, int y2)
 {
@@ -19,6 +27,16 @@ int Coords::GetAbsY1() { return GetY1() + offsetY; }
 int Coords::GetAbsY2() { return GetY2() + offsetY; }
 int Coords::GetOffsetX() { return offsetX; }
 int Coords::GetOffsetY() { return offsetY; }
+
+int Coords::GetHorizUnits()
+{
+	return horizUnits;
+}
+
+int Coords::GetVertUnits()
+{
+	return vertUnits;
+}
 
 int Coords::SetX(int x1, int x2)
 {

@@ -1,0 +1,10 @@
+﻿# use lowercase letters for constants, should start with a letter
+app_height		1017
+app_width		591
+ff_x1			0
+ff_x2			553
+ff_y1			35
+ff_y2			1017
+ff_height		982
+ff_width		553
+test            ff_y1

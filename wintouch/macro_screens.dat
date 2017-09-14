@@ -1,0 +1,233 @@
+# define available screens, we know which screen it is by searching for an
+# image in specified coords, we define available commands that can be done
+# in this screen, like mouse click or mouse darg.
+# The ##_KOEF values are used to define area in which image search or 
+# mouse click should be done
+# new screen should start with a name SCREEN
+#
+# by default:
+#  - search is horizontally in the middle of app
+#  - click coods are the same as search area coords
+# time is in miliseconds
+#
+# - - - - - - - - - - - - - - Connection Error  - - - - - - - - - - - - - - #
+SCREEN              "screen_ConnectionError"
+LOOK_FOR			"images/connection_error.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				730
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_ConnectionError"
+    AFTER_CLICK_TIME	3000
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50
+# - - - - - - - - - - - - - Daily Quest Completed - - - - - - - - - - - - - #
+SCREEN              "screen_DailyQuestCompleted"
+LOOK_FOR			"images/daily_quest.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				730
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_DailyQuestCompleted"
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50
+# - - - - - - - - - - - - - - Earth Shrine Exit - - - - - - - - - - - - - - #
+SCREEN              "screen_EarthShrineExit"
+LOOK_FOR			"images/earth_shrine_exit.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				730
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_EarthShrineExit"
+# - - - - - - - - - - - - - - - - No Energy - - - - - - - - - - - - - - - - #
+SCREEN              "screen_NoEnergy"
+LOOK_FOR			"images/no_ene_msg.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				730
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_NoEnergyBtnBack"
+    BEFORE_CLICK_TIME	300000
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50					
+CLICK				"click_NoEnergyBtnUseLapis"
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50					
+# - - - - - - - - - - - - - -  Agree Use Lapis  - - - - - - - - - - - - - - #
+SCREEN              "screen_AgreeUseLapis"
+LOOK_FOR			"images/agree_use_lapis.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				730
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_AgreeUseLapis"
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50					
+# - - - - - - - - - - - - - - - - Missions  - - - - - - - - - - - - - - - - #
+SCREEN              "screen_Missions"
+LOOK_FOR			"images/missions_next.png"
+X1_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_MissionsBtnNext"
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50					
+# - - - - - - - - - - - - - - - No Companion  - - - - - - - - - - - - - - - #
+SCREEN              "screen_NoComapnion"
+LOOK_FOR			"images/slider.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+DRAG				"drag_slider"
+    Y_DRAG_KOEF			509
+CLICK				"click_NoCompanionBtn"
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50					
+# - - - - - - - - - - - - - - - -  Depart - - - - - - - - - - - - - - - - - #
+SCREEN              "screen_Depart"
+LOOK_FOR			"images/depart.png"
+X1_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_DepartBtn"
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50
+# - - - - - - - - - - - - - - - Repeat Enabled  - - - - - - - - - - - - - - #
+SCREEN              "screen_ReapeatEnabled"
+LOOK_FOR			"images/repeat.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_RepeatBtn"
+CLICK				"click_AttackUnit1"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+CLICK				"click_AttackUnit2"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+CLICK				"click_AttackUnit3"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+CLICK				"click_AttackUnit4"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+CLICK				"click_AttackUnit5"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+CLICK				"click_AttackUnit6"
+    AFTER_CLICK_TIME	50
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50	
+# - - - - - - - - - - - - - -  Repeat Disabled  - - - - - - - - - - - - - - #
+SCREEN              "screen_ReapeatDisabled"
+LOOK_FOR			"images/repeat_disabled.png"
+X1_KOEF				50
+HORIZ_MIDDLE		0
+X2_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+# - - - - - - - - - - - - - - -  Results Gil - - - - - - - - - - - - - - - #
+SCREEN              "screen_ResultsGil"
+LOOK_FOR			"images/results_gil.png"
+X1_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_ResultsGilMsg"
+    AFTER_CLICK_TIME	500
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50
+CLICK				"click_ResultsGilNextBtn"
+    AFTER_CLICK_TIME	1000
+    X1_KOEF				50
+    Y1_KOEF				315
+    Y2_KOEF				50
+# - - - - - - - - - - - - - - -  Results Exp - - - - - - - - - - - - - - - #
+SCREEN              "screen_ResultsExp"
+LOOK_FOR			"images/results_exp.png"
+X1_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_ResultsExp"
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50
+# - - - - - - - - - - - - - - - Results Items - - - - - - - - - - - - - - - #
+SCREEN              "screen_ResultsItems"
+LOOK_FOR			"images/results_items.png"
+X1_KOEF				50
+Y1_KOEF				315
+Y2_KOEF				50
+CLICK				"click_ResultsItemsMsg"
+    AFTER_CLICK_TIME	2000
+    X1_KOEF				50
+    HORIZ_MIDDLE		0
+    X2_KOEF				730
+    Y1_KOEF				315
+    Y2_KOEF				50
+CLICK				"click_ResultsItemsNextBtn"
+    AFTER_CLICK_TIME	3000
+    X1_KOEF				50
+    Y1_KOEF				50
+    Y2_KOEF				50
+# - - - - - - - - - - - - - - - -  logapp - - - - - - - - - - - - - - - - - #
+SCREEN              "screen_Logapp"
+LOOK_FOR			"images/logapp.png"
+X1_KOEF				75
+HORIZ_MIDDLE		0
+X2_KOEF				110
+Y1_KOEF				35
+Y2_KOEF				70
+SHOW                0
+CLICK				"click_Logapp"
+    AFTER_CLICK_TIME	50
+CLICK				"click_Logapp2"
+    AFTER_CLICK_TIME	50

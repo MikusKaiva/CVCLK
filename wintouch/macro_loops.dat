@@ -1,0 +1,25 @@
+# This file contains macros that can be chosen in application
+# MAX FAILURES will reset to value shown each time a step succeeds
+# STEP will be run in ordeer, when last one is run, procceed with first
+# STEP_2 will be run only if previous step succeeds
+# steps are defined in file "macro_steps.dat"
+
+# - - - - - - - - - - - - -  Earth Shrine - Exit  - - - - - - - - - - - - - #
+LOOP            "Earth Shrine - Exit"
+MAX_FAILURES    1000
+STEP            "step_EarthShrineExit"
+STEP            "step_Missions"
+STEP            "step_NoComapnion"
+STEP            "step_Depart"
+STEP_2            "step_WaitAttack"
+STEP            "step_Attack"
+STEP_2            "step_WaitResults"
+STEP            "step_ResultsGil"
+STEP            "step_ResultsExp"
+STEP            "step_ResultsItems"
+STEP            "step_ConnectionError"
+STEP            "step_DailyQuestCompleted"
+# - - - - - - - - - - - - - - - -  logapp - - - - - - - - - - - - - - - - - #
+LOOP            "logapp"
+MAX_FAILURES    0
+STEP            "step_Logapp"

@@ -3,6 +3,7 @@
 public class Coords
 {
 public:
+	Coords();
 	Coords(int x1, int y1, int x2, int y2);
 	int GetX1();
 	int GetX2();
@@ -15,6 +16,8 @@ public:
 	int GetAbsY2();
 	int GetOffsetX();
 	int GetOffsetY();
+	int GetHorizUnits();
+	int GetVertUnits();
 
 	int SetX	(int x1, int x2);
 	int SetY	(int y1, int y2);
@@ -32,5 +35,5 @@ public:
 
 private:
 	int x1, x2, y1, y2;
-	static int offsetX, offsetY;
+	static int offsetX, offsetY, horizUnits, vertUnits;
 };

@@ -33,12 +33,6 @@
     <Filter Include="Source Files\macros">
       <UniqueIdentifier>{caf79b92-d876-47ec-bc16-f962bae6cc04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ClickObjects">
-      <UniqueIdentifier>{140efc61-c3ec-488c-976f-92b3a279b9f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\ClickObjects">
-      <UniqueIdentifier>{6026379d-ac2a-4f1b-98fe-8690197bf368}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_ui_init.cpp">
@@ -62,13 +56,7 @@
     <ClCompile Include="Coords.cpp">
       <Filter>Source Files\gme</Filter>
     </ClCompile>
-    <ClCompile Include="FFapp.cpp">
-      <Filter>Source Files\gme</Filter>
-    </ClCompile>
     <ClCompile Include="Nox.cpp">
-      <Filter>Source Files\gme</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldMap.cpp">
       <Filter>Source Files\gme</Filter>
     </ClCompile>
     <ClCompile Include="DesktopCapture.cpp">
@@ -77,53 +65,38 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
-    <ClCompile Include="MacroFile.cpp">
-      <Filter>Source Files\macros</Filter>
-    </ClCompile>
     <ClCompile Include="MacroFunctions.cpp">
       <Filter>Source Files\macros</Filter>
     </ClCompile>
     <ClCompile Include="UiInit.cpp">
       <Filter>Source Files\general</Filter>
     </ClCompile>
-    <ClCompile Include="DungeonLocator.cpp">
-      <Filter>Source Files\gme</Filter>
-    </ClCompile>
-    <ClCompile Include="Energy.cpp">
-      <Filter>Source Files\gme</Filter>
-    </ClCompile>
-    <ClCompile Include="ConnectionError.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="DailyQuestCompleted.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Missions.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="NoCompanion.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Depart.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Attack.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultsGil.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultsExp.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultsItems.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ToggleMapIcon.cpp">
-      <Filter>Source Files\ClickObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Wait.cpp">
       <Filter>Source Files\gme</Filter>
+    </ClCompile>
+    <ClCompile Include="UniversalFunctions.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroConstantFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroRelativeFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroGlobalsFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroScreensFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroStepsFile.cpp">
+      <Filter>Source Files\macros</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroLoopsFile.cpp">
+      <Filter>Source Files\macros</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,13 +118,7 @@
     <ClInclude Include="Coords.h">
       <Filter>Header Files\gme</Filter>
     </ClInclude>
-    <ClInclude Include="FFapp.h">
-      <Filter>Header Files\gme</Filter>
-    </ClInclude>
     <ClInclude Include="Nox.h">
-      <Filter>Header Files\gme</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldMap.h">
       <Filter>Header Files\gme</Filter>
     </ClInclude>
     <ClInclude Include="DesktopCapture.h">
@@ -159,9 +126,6 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files\general</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroFile.h">
-      <Filter>Header Files\macros</Filter>
     </ClInclude>
     <ClInclude Include="MacroFunctions.h">
       <Filter>Header Files\macros</Filter>
@@ -172,44 +136,32 @@
     <ClInclude Include="UiInit.h">
       <Filter>Header Files\general</Filter>
     </ClInclude>
-    <ClInclude Include="DungeonLocator.h">
-      <Filter>Header Files\gme</Filter>
-    </ClInclude>
-    <ClInclude Include="Energy.h">
-      <Filter>Header Files\gme</Filter>
-    </ClInclude>
-    <ClInclude Include="ConnectionError.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DailyQuestCompleted.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Missions.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="NoCompanion.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Depart.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Attack.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultsGil.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultsExp.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultsItems.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ToggleMapIcon.h">
-      <Filter>Header Files\ClickObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Wait.h">
       <Filter>Header Files\gme</Filter>
+    </ClInclude>
+    <ClInclude Include="UniversalFunctions.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroConstantFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroRelativeFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroGlobalsFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroScreensFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroStepsFile.h">
+      <Filter>Header Files\macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroLoopsFile.h">
+      <Filter>Header Files\macros</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
