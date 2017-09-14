@@ -13,28 +13,28 @@
 # - - - - - - - - - - - - - - Connection Error  - - - - - - - - - - - - - - #
 SCREEN              "screen_ConnectionError"
 LOOK_FOR			"images/connection_error.png"
-X1_KOEF				50
+X1_KOEF				330
 HORIZ_MIDDLE		0
-X2_KOEF				730
-Y1_KOEF				315
-Y2_KOEF				50
+X2_KOEF				350
+Y1_KOEF				410
+Y2_KOEF				34
 CLICK				"click_ConnectionError"
     AFTER_CLICK_TIME	3000
-    X1_KOEF				50
-    Y1_KOEF				315
-    Y2_KOEF				50
+    X1_KOEF				360
+    Y1_KOEF				550
+    Y2_KOEF				53
 # - - - - - - - - - - - - - Daily Quest Completed - - - - - - - - - - - - - #
 SCREEN              "screen_DailyQuestCompleted"
 LOOK_FOR			"images/daily_quest.png"
-X1_KOEF				50
-HORIZ_MIDDLE		0
-X2_KOEF				730
-Y1_KOEF				315
+X1_KOEF				250
+Y1_KOEF				260
 Y2_KOEF				50
 CLICK				"click_DailyQuestCompleted"
-    X1_KOEF				50
-    Y1_KOEF				315
-    Y2_KOEF				50
+    X1_KOEF				150
+    HORIZ_MIDDLE		0
+    X2_KOEF				220
+    Y1_KOEF				600
+    Y2_KOEF				40
 # - - - - - - - - - - - - - - Earth Shrine Exit - - - - - - - - - - - - - - #
 SCREEN              "screen_EarthShrineExit"
 LOOK_FOR			"images/earth_shrine_exit.png"
