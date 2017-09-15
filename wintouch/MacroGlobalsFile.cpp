@@ -2,12 +2,12 @@
 
 int MacroGlobals::X1_REF_POINT = 0;
 int MacroGlobals::HORIZONTAL_UNITS = 500;
-int MacroGlobals::X1_KOEF = 1000;
+int MacroGlobals::X1_KOEF = 0;
 int MacroGlobals::X2_REF_POINT = 500;
 int MacroGlobals::X2_KOEF = 1000;
 int MacroGlobals::Y1_REF_POINT = 0;
 int MacroGlobals::VERTICAL_UNITS = 500;
-int MacroGlobals::Y1_KOEF = 1000;
+int MacroGlobals::Y1_KOEF = 0;
 int MacroGlobals::Y2_KOEF = 1000;
 int MacroGlobals::AFTER_CLICK_TIME = 1000;
 int MacroGlobals::BEFORE_CLICK_TIME = 0;

@@ -50,14 +50,57 @@
 
     <DockPanel Name="mainPanel"
                IsEnabled ="{Binding Path=PanelEnabled.Value, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
-        <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
-            <Label                 Width="50" Content="NOX:"    HorizontalContentAlignment="Right" />
-            <Label Name="noxLabel" Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
-        </StackPanel>
-        <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
-            <Label                 Width="50" Content="FF:"     HorizontalContentAlignment="Right" />
-            <Label Name="ffLabel"  Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
-        </StackPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <DockPanel DockPanel.Dock="Left">
+                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label                 Width="50" Content="NOX:"    HorizontalContentAlignment="Right" />
+                    <Label Name="noxLabel" Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
+                </StackPanel>
+                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label                 Width="50" Content="FF:"     HorizontalContentAlignment="Right" />
+                    <Label Name="ffLabel"  Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
+                </StackPanel>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Right">
+                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal" >
+                    <Label                 Width="50" Content="Screens:"    HorizontalContentAlignment="Right" />
+                    <ComboBox
+                        Name="lbxScreen" Height="20" Width="150" HorizontalContentAlignment="Left"
+                        ItemsSource="{Binding}" SelectedIndex="0"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        />
+                    <Button
+                        Name="btnShowScreen" Width="40" Height="20" Content="Show!"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                    />
+                </StackPanel>
+                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label                 Width="50" Content="Clicks:"    HorizontalContentAlignment="Right" />
+                    <ComboBox
+                        Name="lbxClick" Height="20" Width="150" HorizontalContentAlignment="Left"
+                        ItemsSource="{Binding}" SelectedIndex="0"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        />
+                    <Button
+                        Name="btnShowClick" Width="40" Height="20" Content="Show!"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                    />
+                </StackPanel>
+                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label                 Width="50" Content="Sliders:"    HorizontalContentAlignment="Right" />
+                    <ComboBox
+                        Name="lbxDrag" Height="20" Width="150" HorizontalContentAlignment="Left"
+                        ItemsSource="{Binding}" SelectedIndex="0"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        />
+                    <Button
+                        Name="btnShowDrag" Width="40" Height="20" Content="Show!"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                    />
+                </StackPanel>
+            </DockPanel>
+            <DockPanel />
+        </DockPanel>
         <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
             <Label                 Width="50" Content="Macro:"     HorizontalContentAlignment="Right" />
             <ComboBox

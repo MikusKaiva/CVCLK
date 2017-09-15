@@ -7,7 +7,7 @@
 #
 # by default:
 #  - search is horizontally in the middle of app
-#  - click coods are the same as search area coords
+#  - click coords are the same as search area coords
 # time is in miliseconds
 #
 # - - - - - - - - - - - - - - Connection Error  - - - - - - - - - - - - - - #
@@ -21,6 +21,7 @@ Y2_KOEF				34
 CLICK				"click_ConnectionError"
     AFTER_CLICK_TIME	3000
     X1_KOEF				360
+    HORIZ_MIDDLE		1
     Y1_KOEF				550
     Y2_KOEF				53
 # - - - - - - - - - - - - - Daily Quest Completed - - - - - - - - - - - - - #
@@ -41,7 +42,7 @@ LOOK_FOR			"images/earth_shrine_exit.png"
 X1_KOEF				50
 HORIZ_MIDDLE		0
 X2_KOEF				730
-Y1_KOEF				315
+Y1_KOEF				463
 Y2_KOEF				50
 CLICK				"click_EarthShrineExit"
 # - - - - - - - - - - - - - - - - No Energy - - - - - - - - - - - - - - - - #
@@ -55,6 +56,7 @@ Y2_KOEF				50
 CLICK				"click_NoEnergyBtnBack"
     BEFORE_CLICK_TIME	300000
     X1_KOEF				50
+    HORIZ_MIDDLE		1
     Y1_KOEF				315
     Y2_KOEF				50					
 CLICK				"click_NoEnergyBtnUseLapis"
@@ -80,143 +82,136 @@ CLICK				"click_AgreeUseLapis"
 # - - - - - - - - - - - - - - - - Missions  - - - - - - - - - - - - - - - - #
 SCREEN              "screen_Missions"
 LOOK_FOR			"images/missions_next.png"
-X1_KOEF				50
-Y1_KOEF				315
+X1_KOEF				300
+Y1_KOEF				250
 Y2_KOEF				50
 CLICK				"click_MissionsBtnNext"
-    X1_KOEF				50
-    Y1_KOEF				315
-    Y2_KOEF				50					
+    X1_KOEF				400
+    Y1_KOEF				850
+    Y2_KOEF				50
 # - - - - - - - - - - - - - - - No Companion  - - - - - - - - - - - - - - - #
 SCREEN              "screen_NoComapnion"
 LOOK_FOR			"images/slider.png"
-X1_KOEF				50
+X1_KOEF				33
 HORIZ_MIDDLE		0
-X2_KOEF				50
-Y1_KOEF				315
+X2_KOEF				67
+Y1_KOEF				305
 Y2_KOEF				50
 DRAG				"drag_slider"
-    Y_DRAG_KOEF			509
+    Y_DRAG_KOEF			610
 CLICK				"click_NoCompanionBtn"
-    X1_KOEF				50
-    Y1_KOEF				315
-    Y2_KOEF				50					
+    X1_KOEF				28
+    HORIZ_MIDDLE		1
+    Y1_KOEF				870
+    Y2_KOEF				125
 # - - - - - - - - - - - - - - - -  Depart - - - - - - - - - - - - - - - - - #
 SCREEN              "screen_Depart"
 LOOK_FOR			"images/depart.png"
-X1_KOEF				50
-Y1_KOEF				315
-Y2_KOEF				50
+X1_KOEF				300
+Y1_KOEF				845
+Y2_KOEF				67
 CLICK				"click_DepartBtn"
-    X1_KOEF				50
-    Y1_KOEF				315
-    Y2_KOEF				50
 # - - - - - - - - - - - - - - - Repeat Enabled  - - - - - - - - - - - - - - #
 SCREEN              "screen_ReapeatEnabled"
 LOOK_FOR			"images/repeat.png"
-X1_KOEF				50
+X1_KOEF				250
 HORIZ_MIDDLE		0
-X2_KOEF				50
-Y1_KOEF				315
+X2_KOEF				250
+Y1_KOEF				940
 Y2_KOEF				50
 CLICK				"click_RepeatBtn"
+    X1_KOEF				270
+    HORIZ_MIDDLE		0
+    X2_KOEF				210
+    Y1_KOEF				940
+    Y2_KOEF				47	
 CLICK				"click_AttackUnit1"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				10
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				620
+    Y2_KOEF				100	
 CLICK				"click_AttackUnit2"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				600
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				620
+    Y2_KOEF				100	
 CLICK				"click_AttackUnit3"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				10
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				720
+    Y2_KOEF				100	
 CLICK				"click_AttackUnit4"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				600
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				720
+    Y2_KOEF				100
 CLICK				"click_AttackUnit5"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				10
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				820
+    Y2_KOEF				100
 CLICK				"click_AttackUnit6"
     AFTER_CLICK_TIME	50
-    X1_KOEF				50
+    X1_KOEF				600
     HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50	
+    X2_KOEF				300
+    Y1_KOEF				820
+    Y2_KOEF				100
 # - - - - - - - - - - - - - -  Repeat Disabled  - - - - - - - - - - - - - - #
 SCREEN              "screen_ReapeatDisabled"
 LOOK_FOR			"images/repeat_disabled.png"
-X1_KOEF				50
+X1_KOEF				250
 HORIZ_MIDDLE		0
-X2_KOEF				50
-Y1_KOEF				315
+X2_KOEF				250
+Y1_KOEF				940
 Y2_KOEF				50
-# - - - - - - - - - - - - - - -  Results Gil - - - - - - - - - - - - - - - #
+# - - - - - - - - - - - - - - -  Results Gil  - - - - - - - - - - - - - - - #
 SCREEN              "screen_ResultsGil"
 LOOK_FOR			"images/results_gil.png"
-X1_KOEF				50
-Y1_KOEF				315
+X1_KOEF				250
+HORIZ_MIDDLE		0
+X2_KOEF				250
+Y1_KOEF				380
 Y2_KOEF				50
 CLICK				"click_ResultsGilMsg"
     AFTER_CLICK_TIME	500
-    X1_KOEF				50
-    HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50
 CLICK				"click_ResultsGilNextBtn"
     AFTER_CLICK_TIME	1000
-    X1_KOEF				50
-    Y1_KOEF				315
+    X1_KOEF				400
+    HORIZ_MIDDLE		1
+    Y1_KOEF				850
     Y2_KOEF				50
-# - - - - - - - - - - - - - - -  Results Exp - - - - - - - - - - - - - - - #
+# - - - - - - - - - - - - - - -  Results Exp  - - - - - - - - - - - - - - - #
 SCREEN              "screen_ResultsExp"
 LOOK_FOR			"images/results_exp.png"
-X1_KOEF				50
-Y1_KOEF				315
-Y2_KOEF				50
+X1_KOEF				280
+HORIZ_MIDDLE		0
+X2_KOEF				220
+Y1_KOEF				115
+Y2_KOEF				30
 CLICK				"click_ResultsExp"
-    X1_KOEF				50
-    HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50
 # - - - - - - - - - - - - - - - Results Items - - - - - - - - - - - - - - - #
 SCREEN              "screen_ResultsItems"
 LOOK_FOR			"images/results_items.png"
-X1_KOEF				50
-Y1_KOEF				315
-Y2_KOEF				50
+X1_KOEF				350
+Y1_KOEF				115
+Y2_KOEF				30
 CLICK				"click_ResultsItemsMsg"
     AFTER_CLICK_TIME	2000
-    X1_KOEF				50
-    HORIZ_MIDDLE		0
-    X2_KOEF				730
-    Y1_KOEF				315
-    Y2_KOEF				50
 CLICK				"click_ResultsItemsNextBtn"
     AFTER_CLICK_TIME	3000
-    X1_KOEF				50
-    Y1_KOEF				50
+    X1_KOEF				400
+    Y1_KOEF				850
     Y2_KOEF				50
 # - - - - - - - - - - - - - - - -  logapp - - - - - - - - - - - - - - - - - #
 SCREEN              "screen_Logapp"

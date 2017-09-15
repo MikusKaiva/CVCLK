@@ -35,6 +35,7 @@ namespace ManagedCode
 	int InitApp()
 	{
 		UiInit::Init();
+		Nox::DetermineLocation();
 		return 0;
 	}
 

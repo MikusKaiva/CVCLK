@@ -15,6 +15,9 @@ namespace TheUI
 
         public static ObservableCollection<LogEntry> LogEntries { get; set; }
         public static ObservableCollection<string> MacroNames { get; set; }
+        public static ObservableCollection<string> ScreenNames { get; set; }
+        public static ObservableCollection<string> ClickNames { get; set; }
+        public static ObservableCollection<string> DragNames { get; set; }
         public static ObservableBool PanelEnabled { get; set; }
         public static ObservableControlStates ControlStates { get; set; }
 
@@ -64,10 +67,46 @@ namespace TheUI
             Application.Current.Dispatcher.Invoke((Action)delegate { MacroNames.Add(name); } );
         }
 
+        public void AddScreen(string name)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate { ScreenNames.Add(name); });
+        }
+
+        public void AddClick(string name)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate { ClickNames.Add(name); });
+        }
+
+        public void AddDrag(string name)
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate { DragNames.Add(name); });
+        }
+
         public string GetSelectedDungName()
         {
             string ret = "";
             Application.Current.Dispatcher.Invoke((Action)delegate { ret = (string)lbxMacroName.SelectedValue; } );
+            return ret;
+        }
+
+        public string GetSelectedScreenName()
+        {
+            string ret = "";
+            Application.Current.Dispatcher.Invoke((Action)delegate { ret = (string)lbxScreen.SelectedValue; });
+            return ret;
+        }
+
+        public string GetSelectedClickName()
+        {
+            string ret = "";
+            Application.Current.Dispatcher.Invoke((Action)delegate { ret = (string)lbxClick.SelectedValue; });
+            return ret;
+        }
+
+        public string GetSelectedDragName()
+        {
+            string ret = "";
+            Application.Current.Dispatcher.Invoke((Action)delegate { ret = (string)lbxDrag.SelectedValue; });
             return ret;
         }
 
@@ -85,6 +124,9 @@ namespace TheUI
         {
             DataContext = LogEntries = new ObservableCollection<LogEntry>();
             lbxMacroName.DataContext = MacroNames = new ObservableCollection<string>();
+            lbxScreen.DataContext = ScreenNames = new ObservableCollection<string>();
+            lbxClick.DataContext = ClickNames = new ObservableCollection<string>();
+            lbxDrag.DataContext = DragNames = new ObservableCollection<string>();
             PanelEnabled = new ObservableBool() { Value = false };
             ControlStates = new ObservableControlStates { State = ObservableControlStates.StateEnum.Stopped };
         }
@@ -97,6 +139,21 @@ namespace TheUI
         public ToggleButton GetRunPauseMacroBtn()
         {
             return btnRunMacro;
+        }
+
+        public Button GetShowScreenBtn()
+        {
+            return btnShowScreen;
+        }
+
+        public Button GetShowClickBtn()
+        {
+            return btnShowClick;
+        }
+
+        public Button GetShowDragBtn()
+        {
+            return btnShowDrag;
         }
 
         private void Clear_Log(object sender, RoutedEventArgs e)
