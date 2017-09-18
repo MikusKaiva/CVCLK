@@ -31,37 +31,7 @@ void UiInit::Init()
 
 unsigned __stdcall UiInit::UiInitThread(void * param)
 { 
-	if (   MacroConstants	::LoadFile() < 0
-		|| MacroRelative	::LoadFile() < 0
-		|| MacroGlobals		::LoadFile() < 0
-		|| MacroScreens		::LoadFile() < 0
-		|| MacroStepsF		::LoadFile() < 0
-		|| MacroLoops		::LoadFile() < 0
-		) return 0;
-
-	for (std::pair<std::string, UniversalFunctions::loopFuncParameters> loop : UniversalFunctions::loopFuncParamDB)
-	{
-		System::String^ cliLoop = msclr::interop::marshal_as<System::String^>(loop.first);
-		ManagedCode::ManagedGlobals::w->AddDung(cliLoop);
-	}
-
-	for (std::pair<std::string, UniversalFunctions::screenFuncParameters> screen : UniversalFunctions::screenFuncParamDB)
-	{
-		System::String^ cliScreen = msclr::interop::marshal_as<System::String^>(screen.first);
-		ManagedCode::ManagedGlobals::w->AddScreen(cliScreen);
-	}
-
-	for (std::pair<std::string, UniversalFunctions::clickFuncParameters> click : UniversalFunctions::clickFuncParamDB)
-	{
-		System::String^ cliClick = msclr::interop::marshal_as<System::String^>(click.first);
-		ManagedCode::ManagedGlobals::w->AddClick(cliClick);
-	}
-
-	for (std::pair<std::string, UniversalFunctions::dragFuncParameters> drag : UniversalFunctions::dragFuncParamDB)
-	{
-		System::String^ cliDrag = msclr::interop::marshal_as<System::String^>(drag.first);
-		ManagedCode::ManagedGlobals::w->AddDrag(cliDrag);
-	}
+	if (LoadMacros() != 0) return 1;
 
 	using namespace System::Windows::Controls;
 	using namespace System::Windows::Controls::Primitives;
@@ -80,6 +50,8 @@ unsigned __stdcall UiInit::UiInitThread(void * param)
 	btnShowClick->Click += gcnew System::Windows::RoutedEventHandler(&OnShowObjectBtnClick);
 	btnShowDrag->Click += gcnew System::Windows::RoutedEventHandler(&OnShowObjectBtnClick);
 
+	Button^ btnReload = ManagedCode::ManagedGlobals::w->GetReloadBtn();
+	btnReload->Click += gcnew System::Windows::RoutedEventHandler(&OnReloadBtnClick);
 
 	ManagedCode::ManagedGlobals::w->EnablePanel();
 	
@@ -133,51 +105,65 @@ unsigned __stdcall UiInit::RunDetermineLocationsThread(void * param)
 	return 0;
 };
 
-unsigned __stdcall UiInit::ShowScreenThread(void * param)
+unsigned __stdcall UiInit::ShowPartOfDesktopThread(void * param)
 {
-	System::String^ cliName = ManagedCode::ManagedGlobals::w->GetSelectedScreenName();
-	std::string cppName = msclr::interop::marshal_as<std::string>(cliName);
+	std::string* x = reinterpret_cast<std::string*>(param);
+	std::string cppNameOfButton = *x;
+	delete x;
+	System::String^ nameOfButton = msclr::interop::marshal_as<System::String^>(cppNameOfButton);
 
-	for (auto item : UniversalFunctions::screenFuncParamDB)
+
+	System::String^ cliName;
+	std::string cppName;
+
+	using namespace System::Windows::Controls;
+	System::String^ btnShowScreenName = ManagedCode::ManagedGlobals::w->GetShowScreenBtnName();
+	System::String^ btnShowClickName = ManagedCode::ManagedGlobals::w->GetShowClickBtnName();
+	System::String^ btnShowDragName = ManagedCode::ManagedGlobals::w->GetShowDragBtnName();
+
+	if (nameOfButton == btnShowScreenName)
 	{
-		if (item.first == cppName)
+		cliName = ManagedCode::ManagedGlobals::w->GetSelectedScreenName();
+		cppName = msclr::interop::marshal_as<std::string>(cliName);
+
+		for (auto item : UniversalFunctions::screenFuncParamDB)
 		{
-			ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
-			break;
+			if (item.first == cppName)
+			{
+				ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
+				break;
+			}
 		}
 	}
-	return 0;
-};
-
-unsigned __stdcall UiInit::ShowClickThread(void * param)
-{
-	System::String^ cliName = ManagedCode::ManagedGlobals::w->GetSelectedClickName();
-	std::string cppName = msclr::interop::marshal_as<std::string>(cliName);
-
-	for (auto item : UniversalFunctions::clickFuncParamDB)
+	else if (nameOfButton == btnShowClickName)
 	{
-		if (item.first == cppName)
+		cliName = ManagedCode::ManagedGlobals::w->GetSelectedClickName();
+		cppName = msclr::interop::marshal_as<std::string>(cliName);
+
+		for (auto item : UniversalFunctions::clickFuncParamDB)
 		{
-			ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
-			break;
+			if (item.first == cppName)
+			{
+				ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
+				break;
+			}
 		}
 	}
-	return 0;
-};
-
-unsigned __stdcall UiInit::ShowDragThread(void * param)
-{
-	System::String^ cliName = ManagedCode::ManagedGlobals::w->GetSelectedDragName();
-	std::string cppName = msclr::interop::marshal_as<std::string>(cliName);
-
-	for (auto item : UniversalFunctions::dragFuncParamDB)
+	else if (nameOfButton == btnShowDragName)
 	{
-		if (item.first == cppName)
+		cliName = ManagedCode::ManagedGlobals::w->GetSelectedDragName();
+		cppName = msclr::interop::marshal_as<std::string>(cliName);
+
+		for (auto item : UniversalFunctions::dragFuncParamDB)
 		{
-			ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
-			break;
+			if (item.first == cppName)
+			{
+				ShowPartOfDesktop(cppName, item.second.coords.GetAbsX1(), item.second.coords.GetAbsY1(), item.second.coords.GetAbsX2(), item.second.coords.GetAbsY2());
+				break;
+			}
 		}
 	}
+
 	return 0;
 };
 
@@ -229,16 +215,57 @@ void UiInit::OnShowObjectBtnClick(System::Object ^sender, System::Windows::Route
 
 	unsigned tid; // thread ID
 	std::string x = msclr::interop::marshal_as<std::string>(((Button^)sender)->Name);
-	if (x == "btnShowScreen")
+	std::string* nameOfButton = new std::string(x);
+	_beginthreadex(NULL, 0, ShowPartOfDesktopThread, (void *)nameOfButton, 0, &tid);
+}
+
+void UiInit::OnReloadBtnClick(System::Object ^sender, System::Windows::RoutedEventArgs ^e)
+{
+	LoadMacros();
+}
+
+int UiInit::LoadMacros()
+{
+	UniversalFunctions::loopFuncParamDB		.clear();
+	UniversalFunctions::screenFuncParamDB	.clear();
+	UniversalFunctions::clickFuncParamDB	.clear();
+	UniversalFunctions::dragFuncParamDB		.clear();
+	UniversalFunctions::stepFuncParamDB		.clear();
+	ManagedCode::ManagedGlobals::w->ClearLists();
+
+	if (MacroConstants::LoadFile() < 0
+		|| MacroRelative::LoadFile() < 0
+		|| MacroGlobals::LoadFile() < 0
+		|| MacroScreens::LoadFile() < 0
+		|| MacroStepsF::LoadFile() < 0
+		|| MacroLoops::LoadFile() < 0
+		) return -1;
+
+	Nox::DetermineLocation();
+
+	for (std::pair<std::string, UniversalFunctions::loopFuncParameters> loop : UniversalFunctions::loopFuncParamDB)
 	{
-		_beginthreadex(NULL, 0, ShowScreenThread, (void *)NULL, 0, &tid);
+		System::String^ cliLoop = msclr::interop::marshal_as<System::String^>(loop.first);
+		ManagedCode::ManagedGlobals::w->AddDung(cliLoop);
 	}
-	else if (x == "btnShowClick")
+
+	for (std::pair<std::string, UniversalFunctions::screenFuncParameters> screen : UniversalFunctions::screenFuncParamDB)
 	{
-		_beginthreadex(NULL, 0, ShowClickThread, (void *)NULL, 0, &tid);
+		System::String^ cliScreen = msclr::interop::marshal_as<System::String^>(screen.first);
+		ManagedCode::ManagedGlobals::w->AddScreen(cliScreen);
 	}
-	else if (x == "btnShowDrag")
+
+	for (std::pair<std::string, UniversalFunctions::clickFuncParameters> click : UniversalFunctions::clickFuncParamDB)
 	{
-		_beginthreadex(NULL, 0, ShowDragThread, (void *)NULL, 0, &tid);
+		System::String^ cliClick = msclr::interop::marshal_as<System::String^>(click.first);
+		ManagedCode::ManagedGlobals::w->AddClick(cliClick);
 	}
+
+	for (std::pair<std::string, UniversalFunctions::dragFuncParameters> drag : UniversalFunctions::dragFuncParamDB)
+	{
+		System::String^ cliDrag = msclr::interop::marshal_as<System::String^>(drag.first);
+		ManagedCode::ManagedGlobals::w->AddDrag(cliDrag);
+	}
+
+	return 0;
 }

@@ -51,9 +51,13 @@ int GetPartOfDesktop(cv::Mat& src, int x1, int y1, int x2, int y2)
 
 int ShowPartOfDesktop(std::string name, int x1, int y1, int x2, int y2)
 {
-	cv::Mat src;
-	GetPartOfDesktop(src, x1, y1, x2, y2);
+	const int offset = 30;
+	const Scalar colorRed(0, 0, 255);
 
+	cv::Mat src;
+	GetPartOfDesktop(src, x1 - offset, y1 - offset, x2 + offset, y2 + offset);
+	rectangle(src, Point(offset, offset), Point(src.cols - offset, src.rows - offset), colorRed);
+	cv::destroyWindow(name);
 	namedWindow(name, WINDOW_AUTOSIZE);
 	imshow(name, src);
 	waitKey();

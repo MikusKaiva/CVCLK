@@ -1,6 +1,8 @@
 # used to find the app location on screen
 # top left corner of image location found on desktop will be used to set 
 # all other object coord offsets
+# set ENABLED to 0 to not to find app location and to use offset [0,0]
+# ENABLED	0
 LOOK_FOR		"images/nox.png"
 X1	0
 Y1	0

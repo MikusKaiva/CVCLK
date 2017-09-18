@@ -1,4 +1,5 @@
 #include "MacroRelativeFile.h"
+#include "Nox.h"
 
 std::string MacroRelative::lookFor = "";
 int MacroRelative::X1 = 0;
@@ -27,6 +28,10 @@ int MacroRelative::StoreData(const std::string& name, const FileReader::unionVal
 	else if (name == "Y2")
 	{
 		Y2 = value.iValue;
+	}
+	else if (name == "ENABLED")
+	{
+		Nox::enabled = value.iValue;
 	}
 	else
 	{

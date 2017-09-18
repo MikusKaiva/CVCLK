@@ -7,4 +7,5 @@ public class Nox
 public:
 	static int DetermineLocation();
 	static Coords coords;
+	static bool enabled;
 };

@@ -73,6 +73,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetWintouchControls.cs" />
+    <Compile Include="ListBoxItems.cs" />
+    <Compile Include="wintouch.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

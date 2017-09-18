@@ -18,6 +18,14 @@ int Nox::DetermineLocation()
 	const int SEARCH_AREA_X2 = MacroRelative::X2;
 	const int SEARCH_AREA_Y2 = MacroRelative::Y2;
 
+	if (!enabled)
+	{
+		coords.SetOffset(0, 0);
+		coords.SetAbsX(0, WIDTH);
+		coords.SetAbsY(0, HEIGHT);
+		return 0;
+	}
+
 	Mat templ, src;
 	int res = -1;
 	int x1, y1, x2, y2;
@@ -52,3 +60,4 @@ int Nox::DetermineLocation()
 }
 
 Coords Nox::coords = Coords(-1, -1, 360, 640);
+bool Nox::enabled = true;

@@ -52,13 +52,17 @@
                IsEnabled ="{Binding Path=PanelEnabled.Value, RelativeSource={RelativeSource AncestorType={x:Type Page}}}">
         <DockPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Left">
-                <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label                 Width="50" Content="NOX:"    HorizontalContentAlignment="Right" />
-                    <Label Name="noxLabel" Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Button
+                        Name="btnReload" Width="60" Height="30" Content="Reload!" Margin="50,15,10,5"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                    />
+                    <!--<Label                 Width="50" Content="NOX:"    HorizontalContentAlignment="Right" />
+                    <Label Name="noxLabel" Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />-->
                 </StackPanel>
                 <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Label                 Width="50" Content="FF:"     HorizontalContentAlignment="Right" />
-                    <Label Name="ffLabel"  Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />
+                    <!--<Label                 Width="50" Content="FF:"     HorizontalContentAlignment="Right" />
+                    <Label Name="ffLabel"  Width="70" Content="Stopped" HorizontalContentAlignment="Left"  />-->
                 </StackPanel>
             </DockPanel>
             <DockPanel DockPanel.Dock="Right">
@@ -67,7 +71,8 @@
                     <ComboBox
                         Name="lbxScreen" Height="20" Width="150" HorizontalContentAlignment="Left"
                         ItemsSource="{Binding}" SelectedIndex="0"
-                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                        SelectionChanged="lbxScreen_SelectionChanged"
                         />
                     <Button
                         Name="btnShowScreen" Width="40" Height="20" Content="Show!"
@@ -79,7 +84,8 @@
                     <ComboBox
                         Name="lbxClick" Height="20" Width="150" HorizontalContentAlignment="Left"
                         ItemsSource="{Binding}" SelectedIndex="0"
-                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                        SelectionChanged="lbxClick_SelectionChanged"
                         />
                     <Button
                         Name="btnShowClick" Width="40" Height="20" Content="Show!"
@@ -91,7 +97,8 @@
                     <ComboBox
                         Name="lbxDrag" Height="20" Width="150" HorizontalContentAlignment="Left"
                         ItemsSource="{Binding}" SelectedIndex="0"
-                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                        IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                        SelectionChanged="lbxDrag_SelectionChanged"
                         />
                     <Button
                         Name="btnShowDrag" Width="40" Height="20" Content="Show!"
@@ -106,7 +113,8 @@
             <ComboBox
                 Name="lbxMacroName" Height="20" Width="170" HorizontalContentAlignment="Left"
                 ItemsSource="{Binding}" SelectedIndex="0"
-                IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"
+                IsEnabled ="{Binding Path=ControlStates.MacroListEnabled, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                SelectionChanged="lbxMacroName_SelectionChanged"
                 />
             <ToggleButton
                 Name ="btnRunMacro" Width="50" Height="20"
