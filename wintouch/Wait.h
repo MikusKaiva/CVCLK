@@ -6,7 +6,6 @@ public class WaitClass
 {
 public:
 	static int Wait(int miliSeconds);
-	static int WaitClickableObject(bool(*object)());
 	static int Start();
 	static void Pause();
 	static int Resume();

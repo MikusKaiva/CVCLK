@@ -1,109 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace TheUI
 {
     public partial class wintouch : Page
     {
-        private int index;
-
-        public static ObservableCollection<LogEntry> LogEntries { get; set; }
-        public static ObservableCollection<string> MacroNames { get; set; }
-        public static ObservableBool PanelEnabled { get; set; }
-        public static ObservableControlStates ControlStates { get; set; }
-
-        public wintouch()
-        {
-            if (null == System.Windows.Application.Current)
-            {
-                new System.Windows.Application();
-            }
-            InitializeComponent();
-            Init();
-        }
-        public wintouch(int w, int h)
-        {
-            if (null == System.Windows.Application.Current)
-            {
-                new System.Windows.Application();
-            }
-            InitializeComponent();
-            Width = w;
-            Height = h;
-            Init();
-        }
-
-        public void Log(string msg)
-        {
-            DateTime time = DateTime.Now;
-            string timeString = time.Hour.ToString() + ":";
-            if (time.Minute <= 9) timeString += "0";
-            timeString += time.Minute.ToString() + ":";
-            if (time.Second <= 9) timeString += "0";
-            timeString += time.Second.ToString() + "  ";
-
-            Application.Current.Dispatcher.Invoke((Action)delegate
-            {
-                LogEntries.Add(new LogEntry() { Index = index++, DateTime = timeString, Message = msg });
-            });
-        }
-
-        public void EnablePanel()
-        {
-            Application.Current.Dispatcher.Invoke( (Action)delegate { PanelEnabled.Value = true; } );
-        }
-
-        public void AddDung(string name)
-        {
-            Application.Current.Dispatcher.Invoke((Action)delegate { MacroNames.Add(name); } );
-        }
-
-        public string GetSelectedDungName()
-        {
-            string ret = "";
-            Application.Current.Dispatcher.Invoke((Action)delegate { ret = (string)lbxMacroName.SelectedValue; } );
-            return ret;
-        }
-
-        public ObservableControlStates.StateEnum GetState()
-        {
-            return ControlStates.State;
-        }
-
-        public void SetState(ObservableControlStates.StateEnum state)
-        {
-            ControlStates.State = state;
-        }
-
-        private void Init()
-        {
-            DataContext = LogEntries = new ObservableCollection<LogEntry>();
-            lbxMacroName.DataContext = MacroNames = new ObservableCollection<string>();
-            PanelEnabled = new ObservableBool() { Value = false };
-            ControlStates = new ObservableControlStates { State = ObservableControlStates.StateEnum.Stopped };
-        }
-
-        public Button GetStopBtn()
-        {
-            return btnStopMacro;
-        }
-
-        public ToggleButton GetRunPauseMacroBtn()
-        {
-            return btnRunMacro;
-        }
-
-        private void Clear_Log(object sender, RoutedEventArgs e)
-        {
-            LogEntries.Clear();
-        }
     }
+
 
     public class ObservableControlStates : PropertyChangedBase
     {

@@ -1,0 +1,5 @@
+﻿# use lowercase letters for user defined constants, should start with a letter
+# can use these names in other macro_*.dat files
+example1		12345
+example2		"abcd"
+example3		example1

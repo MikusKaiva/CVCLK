@@ -1,0 +1,172 @@
+﻿# we will loop through all the steps, return value will indicate if step was
+# successfull, steps can include commands from more than one screen or
+# we can perform multiple commands on the same screen
+#
+# SUCC - it is 1 if screen was found and 0 if it was not
+# RET  - return value of this step, error: -1 and success: 0
+# by default SUCC = 1 and RET = -1
+#
+### COMMANDS ###
+
+# STEP     "step_Name"   - not a command, defines step name
+
+# LOOK_FOR "screen_Name" - executed if SUCC == 1, if not found SUCC = 0
+#   (looks for an image on screen, parameters defined in macro_screens.dat)
+
+# CLICK    "click_Name"  - executed if SUCC == 1
+#   (clicks mouse on screen, parameters defined in macro_screens.dat)
+
+# DRAG     "drag_Name"   - executed if SUCC == 1
+#   (mouseDown + move + mouseUp on screen, ... in macro_screens.dat)
+
+# CALL     "step_Name"   - executed if SUCC == 1, the result is put in RET
+#   (steps are defined in this file)
+
+# INITIAL_MAX_WAIT  15   - sets time how long to repeat all commands, if 
+#   RET in the end of commands == -1. Command is not included in loop
+#   By default INIT..WAIT = 0, that means only once commands will be run
+#   Use command WAIT to reduce INIT..WAIT. 
+#   INIT..WAIT = 15; do{..;WAIT 1}while(INITIAL_MAX_WAIT > 0 && RET != 0)
+
+# STORE    "RET"         - if SUCC == 1 then RET = 0, else RET = RET
+#   (only [STORE "RET"] is supported, can't be [STORE "SUCC"]
+#   if command is never called, SUCC value will be used to determine RET
+
+# RETURN    "RET"        - if SUCC == 1, exits step and returns RET value
+# RESET     "SUCC"       - sets SUCC = 1
+# RESET     "RET"        - sets RET = -1
+# MAX_WAIT  10           - if RET == 0, sets time how long to repeat all 
+#                          commands
+
+# WAIT      1            - if SUCC == 1, Waits 1 second, put different 
+#                          amount if needed
+
+# CONTINUE  "NEXT"       - if SUCC == 1, skip the rest of commands and start
+#                          next loop iteration
+
+# - - - - - - - - - - - - - - Connection Error  - - - - - - - - - - - - - - #
+STEP        "step_ConnectionError"
+LOOK_FOR    "screen_ConnectionError"
+CLICK       "click_ConnectionError"
+# - - - - - - - - - - - - - Daily Quest Completed - - - - - - - - - - - - - #
+STEP        "step_DailyQuestCompleted"
+LOOK_FOR    "screen_DailyQuestCompleted"
+CLICK       "click_DailyQuestCompleted"
+# - - - - - - - - - - - - - - Earth Shrine Exit - - - - - - - - - - - - - - #
+STEP        "step_EarthShrineExit"
+# if SUCC == 1 (it is by default) look for "screen_EarthShrineExit" screen, 
+#    if screen is not found on desktop: set SUCC to 0.
+# if SUCC == 1 perform EarthShrineExit click
+# if SUCC == 1 set return value RET to 0
+# if SUCC == 1 look for NoEnergy screen, 
+#    if screen is not found on desktop: set SUCC to 0.
+# if SUCC == 1 perform NoEnergyBtnBack click
+# if SUCC == 1 perform EarthShrineExit step
+#    put step result in RET
+LOOK_FOR    "screen_EarthShrineExit"
+CLICK       "click_EarthShrineExit"
+STORE       "RET"
+LOOK_FOR    "screen_NoEnergy"
+CLICK       "click_NoEnergyBtnBack"
+CALL        "step_EarthShrineExit"
+# - - - - - - - - - - - - - - - - Missions  - - - - - - - - - - - - - - - - #
+STEP        "step_Missions"
+LOOK_FOR    "screen_Missions"
+CLICK       "click_MissionsBtnNext"
+# - - - - - - - - - - - - - - - No Companion  - - - - - - - - - - - - - - - #
+STEP        "step_NoComapnion"
+LOOK_FOR    "screen_NoComapnion"
+DRAG        "drag_slider"
+CLICK       "click_NoCompanionBtn"
+# - - - - - - - - - - - - - - - -  Depart - - - - - - - - - - - - - - - - - #
+STEP        "step_Depart"
+LOOK_FOR    "screen_Depart"
+CLICK       "click_DepartBtn"
+# - - - - - - - - - - - - - - -  Wait Attack  - - - - - - - - - - - - - - - #
+# define step "step_WaitAttack"
+STEP        "step_WaitAttack"
+# repeat loop 15 times if in the end of commands RET==-1
+INITIAL_MAX_WAIT    15
+# try to find "screen_ReapeatDisabled". If not found SUCC = 0
+LOOK_FOR             "screen_ReapeatDisabled"
+# if we found "screen_ReapeatDisabled": RET=0, exit loop, return RET.
+RETURN              "RET"
+# we didn't find previous screen, reset SUCC so the next search can be made
+RESET               "SUCC"
+# try to find an other screen
+LOOK_FOR            "screen_ReapeatEnabled"
+# and return RET like before
+RETURN              "RET"
+# didn't find this screen either
+RESET               "SUCC"
+# execute an other step, defined in this file
+CALL                "step_ConnectionError"
+# if last step was executed successfully, repeat this loop 10 more times
+MAX_WAIT            10
+# wait a second before repeating this step
+WAIT                1
+# reset RET value in case "step_ConnectionError" was a success.
+# we don't want to exit this loop if MAX_WAIT has not reached 0.
+RESET               "RET"
+# - - - - - - - - - - - - - - - -  Attack - - - - - - - - - - - - - - - - - #
+STEP                "step_Attack"
+# try to find "screen_ReapeatDisabled". If not found SUCC = 0
+LOOK_FOR            "screen_ReapeatDisabled"
+# if we found "screen_ReapeatDisabled": Wait 1 second and repeat all steps
+WAIT                1
+STORE               "RET"
+CONTINUE            "NEXT"
+# didn't find last screen, reset SUCC to 1
+RESET               "SUCC"
+# try to find "screen_ReapeatEnabled". If not found SUCC = 0
+LOOK_FOR            "screen_ReapeatEnabled"
+STORE               "RET"
+# if we found "screen_ReapeatEnabled": Click Repeat button
+CLICK               "click_RepeatBtn"
+# if screen "screen_ReapeatEnabled" is still visible, click on each char
+LOOK_FOR            "screen_ReapeatEnabled"
+CLICK               "click_AttackUnit1"
+CLICK               "click_AttackUnit2"
+CLICK               "click_AttackUnit3"
+CLICK               "click_AttackUnit4"
+CLICK               "click_AttackUnit5"
+CLICK               "click_AttackUnit6"
+# If we are not done with attack, one of screens should still be there
+RESET               "SUCC"
+LOOK_FOR            "screen_ReapeatDisabled"
+CONTINUE            "NEXT"
+RESET               "SUCC"
+LOOK_FOR            "screen_ReapeatEnabled"
+CONTINUE            "NEXT"
+# We are done, if step succeed one of previous commands STORE put 0 in RET.
+# - - - - - - - - - - - - - - - Wait Results  - - - - - - - - - - - - - - - #
+STEP                "step_WaitResults"
+INITIAL_MAX_WAIT    15
+LOOK_FOR             "screen_ResultsGil"
+RETURN              "RET"
+RESET               "SUCC"
+CALL                "step_ConnectionError"
+MAX_WAIT            10
+WAIT                1
+RESET               "RET"
+# - - - - - - - - - - - - - - -  Results Gil  - - - - - - - - - - - - - - - #
+STEP        "step_ResultsGil"
+LOOK_FOR    "screen_ResultsGil"
+CLICK       "click_ResultsGilMsg"
+CLICK       "click_ResultsGilMsg"
+CLICK       "click_ResultsGilMsg"
+CLICK       "click_ResultsGilNextBtn"
+# - - - - - - - - - - - - - - -  Results Exp  - - - - - - - - - - - - - - - #
+STEP        "step_ResultsExp"
+LOOK_FOR    "screen_ResultsExp"
+CLICK       "click_ResultsExp"
+# - - - - - - - - - - - - - - - Results Items - - - - - - - - - - - - - - - #
+STEP        "step_ResultsItems"
+LOOK_FOR    "screen_ResultsItems"
+CLICK       "click_ResultsItemsMsg"
+CLICK       "click_ResultsItemsNextBtn"
+# - - - - - - - - - - - - - - - -  logapp - - - - - - - - - - - - - - - - - #
+STEP        "step_Logapp"
+LOOK_FOR    "screen_Logapp"
+CLICK       "click_Logapp"
+CLICK       "click_Logapp2"

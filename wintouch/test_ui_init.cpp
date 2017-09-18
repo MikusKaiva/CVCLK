@@ -3,7 +3,6 @@
 #include <process.h>
 #include <msclr\marshal_cppstd.h>
 #include "Log.h"
-#include "MacroFile.h"
 #include "MacroFunctions.h"
 
 
