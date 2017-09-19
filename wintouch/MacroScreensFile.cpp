@@ -181,7 +181,7 @@ int MacroScreens::StoreProperty(UniversalFunctions::funcLocationParameters* para
 		params->x1Koef = value.iValue;
 		int x1 = MacroGlobals::X1_REF_POINT + MacroGlobals::HORIZONTAL_UNITS * params->x1Koef / 1000;
 		int x2 = 0;
-		if (params->horizMiddle)
+		if (params->horizMiddle && params->x1Koef < 500)
 		{
 			x2 = MacroGlobals::X2_REF_POINT - MacroGlobals::HORIZONTAL_UNITS * params->x1Koef / 1000;
 		}
